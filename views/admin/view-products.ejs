@@ -1,0 +1,101 @@
+<%- include('../partials/admin-head') %> <%-
+include('../partials/admin-sidebar') %> <%- include('../partials/admin-navbar')
+%>
+<!--Sweet Alert Codes-->
+
+<!--Sweet Alert CDN-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<section>
+  <div class="col-12">
+    <div>
+      <div style="margin-top: 100px;"></div>
+      <a href="/admin/add-products/" class="btn btn-success float-end mt-4 me-4"
+        >Add Products</a
+      >
+    </div>
+    <div class="bg-light rounded h-100 p-4">
+      <h6 class="mb-4">Products list</h6>
+      <div class="table-responsive">
+        <table id="myTable" class="table display">
+          <thead>
+            <tr>
+              <th scope="col">Images</th>
+              <th scope="col">Title</th>
+              <th scope="col">Category</th>
+              <th scope="col">Brand</th>
+              <th scope="col">Storage</th>
+              <th scope="col">Processor</th>
+              <th scope="col">Stock</th>
+              <th scope="col">Price</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% products.forEach((x)=> { %>
+            <tr>
+              <td>
+                <img
+                  style="width: 50px; height: 50px"
+                  src="/uploads/<%=x.image[0].image1%>"
+                  alt=""
+                />
+              </td>
+              <td><%=x.title %></td>
+              <td><%=x.category %></td>
+              <td><%=x.brand %></td>
+              <td><%=x.specs[2] %></td>
+              <td><%=x.specs[0] %></td>
+              <td><%=x.stock %></td>
+              <td>₹<%=x.price%><br>MRP:<%=x.mrp%></td>
+              <td>
+                <a href="/admin/edit-products/<%=x._id%>"
+                  ><i class="bi bi-pencil-square"></i
+                ></a>
+              </td>
+              <td>
+                <a
+                  class="btn delete-button"
+                  href="/admin/delete-products/<%=x._id%>"
+                  ><i style="color: red" class="bi bi-trash-fill"></i
+                ></a>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  // delete popup
+  $(".delete-button").on("click", function (e) {
+    e.preventDefault();
+    var self = $(this);
+    console.log(self.data("title"));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        location.href = self.attr("href");
+      }
+    });
+  });
+</script>
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+<%- include('../partials/admin-foot') %>

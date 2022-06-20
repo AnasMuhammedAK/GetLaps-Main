@@ -1,0 +1,285 @@
+<%- include('../partials/head') %>
+  <%- include('../partials/navbarmain') %>
+   
+      <section style="margin-top: 20px;min-height: 80vh;" class="">
+        <%if(order.status !="Cancelled" ){%>
+        <div class="container mt-5 ">
+          <div class="row ">
+            <div style="margin: auto;border-radius: 20px;" class="col-12 col-md-10 hh-grayBox pt45 pb20 text-center">
+              <div class="row justify-content-between">
+                <div class="order-tracking">
+                  <span class="is-complete"></span>
+                  <p>Ordered<br><span></span></p>
+                </div>
+                <div class="order-tracking">
+                  <span class="is-complete"></span>
+                  <p>Shipped<br><span></span></p>
+                </div>
+                <div class="order-tracking">
+                  <span class="is-complete"></span>
+                  <p>Delivered<br><span></span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%}else{%>
+          <h1 class="text-center text-danger mt-5">Order Cancelled</h1>
+          <%}%>
+            <div class="container">
+              <div class="row">
+                <section class="h-100 gradient-custom">
+                  <div class="container py-5 h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                      <div class="col-lg-10 col-xl-8">
+                        <div class="card" style="border-radius: 10px;">
+
+                          <div class="card-header px-4 py-5 text-gray-400 text-center">
+                            <h5 class="text-muted mb-0">Ordered Products <span style="color: #a8729a;"></span></h5>
+                          </div>
+                          <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <a class="btn" href="/invoice/<%=order._id%>"><p class="lead fw-normal mb-0" style="color: #000000;">Invoice</p></a>
+                              <p class="small text-muted mb-0">Order Id : <%=order._id%>
+                              </p>
+                            </div>
+                            <% products.forEach((x)=> { %>
+
+                              <div class="card shadow-0 border mb-4">
+                                <a href="/view-products/<%=x.product._id%>">
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col-md-2">
+                                        <img src="/uploads/<%=x.product.image[0].image1%>" class="img-fluid"
+                                          alt="Phone">
+                                      </div>
+                                      <div
+                                        class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                        <p class="text-muted mb-0">
+                                          <%=x.product.title%>
+                                        </p>
+                                      </div>
+                                      <!-- {{!-- <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                <p class="text-muted mb-0 small">{{this.product.Color}}</p>
+                              </div> --}} -->
+                                      <div class="col text-center d-flex justify-content-center align-items-center">
+                                        <p class="text-muted mb-0 small">
+                                          <%=x.product.brand%> - <%=x.product.category%><br>Speciffications :
+                                              <%=x.product.specs[0]%> - <%=x.product.specs[1]%>GB -
+                                                  <%=x.product.specs[2]%>GB
+                                        </p>
+                                      </div>
+                                      <div
+                                        class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                        <p class="text-muted mb-0 small">Quantity : <%=x.quantity%>
+                                        </p>
+                                      </div>
+                                      <div
+                                        class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                        <p class="text-muted mb-0 small">Price : ₹<%=x.product.price%> <br><del>MRP : ₹
+                                              <%=x.product.mrp%></del></p>
+                                      </div>
+
+
+
+
+
+                                    </div>
+
+                                  </div>
+                                </a>
+                              </div>
+                              <% }) %>
+
+                                <div class="d-flex justify-content-between pt-2">
+                                  <p class="fw-bold mb-0">Order Details</p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between pt-2">
+                                  <p class="text-muted mb-0">
+                                    <%=order.deliveryDetails.userName%> <br> Address :
+                                      <%=order.deliveryDetails.address%>
+                                  </p>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                  <p class="text-muted mb-0"> Date - <%=order.date%> <br>Time - <%=order.time%>
+                                  </p>
+                                  <p class="text-muted mb-0"> </p>
+                                  <!-- <p class="text-muted mb-0"><span class="fw-bold me-4">GST 8%</span> {{GST}}</p> -->
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-5">
+                                  <p class="text-muted mb-0"><span class="fw-bold me-4">Total paid: </span> ₹
+                                    <%=order.totalAmount%>
+                                      <br><span class="fw-bold me-4">Discount : </span>
+                                      <%if(order.discount !="" ){%>
+                                        ₹<%=order.discount%> <br> <span class="fw-bold me-4">Total : </span> ₹
+                                        <%=order.totalAmount+order.discount%>
+                                            <%}else{%> 0.00
+                                              <%}%> <br>
+                                                <%if(order.refund !="" ){%><span class="fw-bold me-4">Refund : </span>
+                                                  ₹<%=order.refund%>
+                                                    <%}%>
+                                  </p>
+                                  <p class="text-muted mb-0"></p>
+                                </div>
+                          </div>
+                          <div class="card-footer border-0 px-4 py-5"
+                            style="background-color: rgb(121, 121, 121); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                            <%if(order.refund=="" ){%>
+                              <h6 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
+                                Total
+                                paid: <span class="h4 mb-0 ms-2">
+                                  ₹ <%=order.totalAmount%>
+                                    <%}else{%>
+                                      <h6
+                                        class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
+                                        Refund
+                                        : <span class="h4 mb-0 ms-2">₹ <%=order.refund%>
+
+                                            <%}%>
+                                        </span></h6>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+
+
+              </div>
+
+      </section>
+<section>
+   <!-- Footer Section Begin -->
+   <%- include('../partials/userfooter') %>
+   <!-- Footer Section End -->
+</section>
+
+      <style>
+        body {
+          background: #eee;
+        }
+
+        .hh-grayBox {
+          background-color: #F8F8F8;
+          margin-bottom: 20px;
+          padding: 35px;
+          margin-top: 20px;
+        }
+
+        .pt45 {
+          padding-top: 45px;
+        }
+
+        .order-tracking {
+          text-align: center;
+          width: 33.33%;
+          position: relative;
+          display: block;
+        }
+
+        .order-tracking .is-complete {
+          display: block;
+          position: relative;
+          border-radius: 50%;
+          height: 30px;
+          width: 30px;
+          border: 0px solid #AFAFAF;
+          background-color: #f7be16;
+          margin: 0 auto;
+          transition: background 0.25s linear;
+          -webkit-transition: background 0.25s linear;
+          z-index: 2;
+        }
+
+        .order-tracking .is-complete:after {
+          display: block;
+          position: absolute;
+          content: '';
+          height: 14px;
+          width: 7px;
+          top: -2px;
+          bottom: 0;
+          left: 5px;
+          margin: auto 0;
+          border: 0px solid #AFAFAF;
+          border-width: 0px 2px 2px 0;
+          transform: rotate(45deg);
+          opacity: 0;
+        }
+
+        .order-tracking.completed .is-complete {
+          border-color: #27aa80;
+          border-width: 0px;
+          background-color: #27aa80;
+        }
+
+        .order-tracking.completed .is-complete:after {
+          border-color: #fff;
+          border-width: 0px 3px 3px 0;
+          width: 7px;
+          left: 11px;
+          opacity: 1;
+        }
+
+        .order-tracking p {
+          color: #A4A4A4;
+          font-size: 16px;
+          margin-top: 8px;
+          margin-bottom: 0;
+          line-height: 20px;
+        }
+
+        .order-tracking p span {
+          font-size: 14px;
+        }
+
+        .order-tracking.completed p {
+          color: #000;
+        }
+
+        .order-tracking::before {
+          content: '';
+          display: block;
+          height: 3px;
+          width: calc(100% - 40px);
+          background-color: #f7be16;
+          top: 13px;
+          position: absolute;
+          left: calc(-50% + 20px);
+          z-index: 0;
+        }
+
+        .order-tracking:first-child:before {
+          display: none;
+        }
+
+        .order-tracking.completed:before {
+          background-color: #27aa80;
+        }
+      </style>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+      <script>
+        var foo = "<%=order.status%>";
+        var div = document.getElementsByClassName("order-tracking")
+        if (foo == "placed") {
+          div[0].classList.add('completed')
+        } else if (foo == "Shipped") {
+          div[0].classList.add('completed')
+          div[1].classList.add('completed')
+        } else if (foo == "Delivered") {
+          div[0].classList.add('completed')
+          div[1].classList.add('completed')
+          div[2].classList.add('completed')
+        }
+      </script>
+     
+        <%- include('../partials/foot') %>

@@ -1,0 +1,89 @@
+<%- include('../partials/admin-head') %>
+<%- include('../partials/admin-sidebar') %>
+<%- include('../partials/admin-navbar') %>
+<h6 class="mt-4 mb-3">Add Products</h6>
+<section class="col-xl-10">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="post" action="/admin/tested" enctype="multipart/form-data">
+                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    <div class="row mb-4">
+                      <div class="col">
+                       
+                  
+                    <!-- Text input -->
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form6Example3" class="form-control" name="title"/>
+                      <label class="form-label" for="form6Example3">Title</label>
+                    </div>
+                  <!-- spects input -->
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form6Example6" class="form-control"  name="specs"/>
+                    <label class="form-label" for="form6Example7">Specs</label>
+                  </div>
+                    <!-- Text input -->
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form6Example4" class="form-control" name="description"/>
+                      <label class="form-label" for="form6Example4">Description</label>
+                    </div>
+                  
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                      <input type="number" id="form6Example5" class="form-control" name="price" />
+                      <label class="form-label" for="form6Example5">Price</label>
+                    </div>
+                  
+                    <!-- Number input -->
+                    <div class="form-outline mb-4">
+                      <input type="number" id="form6Example6" class="form-control"  name="stock"/>
+                      <label class="form-label" for="form6Example6">Stock</label>
+                    </div>
+                     
+
+                    <!-- Image Input -->
+                    
+                      <div class="row mb-4">
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="file" id="form6Example1" class="form-control" name="image1" />
+                            <label class="form-label" for="form6Example1">Image 1 (Primary)</label>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="file" id="form6Example2" class="form-control"name="image2" />
+                            <label class="form-label" for="form6Example2">Image 2</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-4">
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="file" id="form6Example1" class="form-control" name="image3" />
+                            <label class="form-label" for="form6Example1">Image 3</label>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="file" id="form6Example2" class="form-control"name="image4" />
+                            <label class="form-label" for="form6Example2">Image 4</label>
+                          </div>
+                        </div>
+                      </div>
+                      
+                  
+                  
+                   
+                    
+                   
+                  
+                      
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4 float-end">Submit</button>
+                  </form>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include('../partials/admin-foot') %>

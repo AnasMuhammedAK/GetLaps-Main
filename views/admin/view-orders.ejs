@@ -1,0 +1,199 @@
+<%- include('../partials/admin-head') %> <%-
+include('../partials/admin-sidebar') %> <%- include('../partials/admin-navbar')
+%>
+
+<!--Sweet Alert Codes-->
+
+<!--Sweet Alert CDN-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- ajax for immediate response for change status btn -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+
+<section>
+  <div class="col-12 mt-5">
+    <div class="bg-light rounded h-100 p-4">
+      <h6 class="mb-4">Products list</h6>
+      <div class="table-responsive">
+        <table id="myTable" class="table display">
+          <thead>
+            <tr>
+              <th scope="col">User Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Date</th>
+              <th scope="col">Amount</th>
+              <!-- <th scope="col">Payment Method</th> -->
+              <th scope="col">Status</th>
+              <th scope="col">Product</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% orders.forEach((x)=> { %>
+            <tr>
+              <td><%=x.deliveryDetails.userName%></td>
+              <td><%=x.deliveryDetails.address%></td>
+              <td>
+                <div><%=x.date%></div>
+                <div><%=x.time%></div>
+              </td>
+              <td><%=x.paymentMethod%> <br />₹<%=x.totalAmount%></td>
+
+              <td class="align-middle">
+                <!-- Example split danger button -->
+                <%if(x.paymentStatus!="pending"){%>
+                <div class="btn-group">
+                  <button
+                    style="outline: none; border: none"
+                    type="button"
+                    class="border-none"
+                  ><span id="<%=x._id%>">
+                    <%=x.status%></span>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <button
+                        class="dropdown-item shipped-button"
+                        onclick="changeStatusShipped('<%=x._id%>')"
+                      >
+                        Shipped
+                      </button>
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+
+                    <li><button class="dropdown-item delivered-button" onclick="changeStatusDelivered('<%=x._id%>')">Delivered</button></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><button class="dropdown-item cancel-button delete-button" onclick="changeStatusCancelled('<%=x._id%>','<%=x.totalAmount%>')">Cancelled</button></li>
+                    <li><hr class="dropdown-divider" /></li>
+                  </ul>
+                </div>
+                <%}else{%> <h6 class="text-danger">Payment is pending</h6>
+                                                                        <%}%>
+              </td>
+              <td class="align-middle">
+                <a href="/admin/view-order-products/<%=x._id %>" class="btn btn-success"
+                  >View</a
+                >
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  $(document).ready(function () {
+    $("#myTable").DataTable();
+  });
+</script>
+<script>
+function changeStatusShipped(orderId) {
+$.ajax({
+  		url: '/admin/order-shipped',
+                   data:{
+                       orderId:orderId
+                    },
+                   method: 'post',
+  		success: (response) => {
+  			console.log('uvdisnvcidnvdsancisdn')
+  			if (response) {
+  				document.getElementById(orderId).innerHTML ='Shipped'
+            }}
+  })
+}
+function changeStatusDelivered(orderId) {
+$.ajax({
+  		url: '/admin/order-delivered',
+                   data:{
+                       orderId:orderId
+                    },
+                   method: 'post',
+  		success: (response) => {
+  			
+  			if (response) {
+  				document.getElementById(orderId).innerHTML ='Delivered'
+            }}
+  })
+}
+function changeStatusCancelled(orderId,refund) {
+$.ajax({
+  		url: '/admin/order-cancelled',
+                   data:{
+                       orderId:orderId,
+                       refund:refund
+
+                    },
+                   method: 'post',
+  		success: (response) => {
+  			
+  			if (response) {
+  				document.getElementById(orderId).innerHTML ='Cancelled'
+            }}
+  })
+}
+</script>
+<script>
+    //  popup
+    $(".cancel-button").on("click", function (e) {
+      e.preventDefault();
+      var self = $(this);
+      console.log(self.data("title"));
+      Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, Cancel This Order'
+      }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+  position: 'top-center',
+  icon: 'success',
+  title: 'Order Cancelled',
+  showConfirmButton: false,
+  timer: 1500
+})
+          }
+      })
+      
+    });
+    //  popup
+    $(".delivered-button").on("click", function (e) {
+      e.preventDefault();
+      var self = $(this);
+      console.log(self.data("title"));
+      Swal.fire({
+  position: 'top-center',
+  icon: 'success',
+  title: 'Order Delivered',
+  showConfirmButton: false,
+  timer: 1500
+})
+    });
+    //  popup
+    $(".shipped-button").on("click", function (e) {
+      e.preventDefault();
+      var self = $(this);
+      console.log(self.data("title"));
+      Swal.fire({
+  position: 'top-center',
+  icon: 'success',
+  title: 'Order Shipped',
+  showConfirmButton: false,
+  timer: 1500
+})
+    });
+  </script>
+<%- include('../partials/admin-foot') %>

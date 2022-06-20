@@ -1,0 +1,51 @@
+<%- include('../partials/admin-head') %>
+<%- include('../partials/admin-sidebar') %>
+<%- include('../partials/admin-navbar') %>
+
+
+
+<section>
+    <div class="col-12">
+        <div>
+            <div style="margin-top: 100px;"></div>
+            <a href="/admin/add-brand" class="btn btn-success float-end mt-4 me-4">Add New Brand</a>
+        </div>
+        <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">Categories</h6>
+            <div class="table-responsive">
+                <table class="table" id="myTable">
+                    <thead>
+                        
+                        <tr>
+                            <th scope="col">Log</th>
+                           
+                            <th scope="col">Brands</th>
+                           
+                            <!-- <th scope="col">Edit</th> -->
+                            <th scope="col">Delete</th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        <% brands.forEach((x) => { %>
+                        <tr>
+                            <th scope="row"><img style="width: 150px; height: 50px;" src="/uploads/<%=x.image%>" alt=""></th>
+                            
+                            <td><%=x.brand %></td>
+                            
+                            <!-- <td><a  href="/admin/edit-brand"><i class="bi bi-pencil-square"></i></a></td> -->
+                            <td><a  href="/admin/delete-brand/<%=x._id%>"><i class="bi bi-trash-fill"></i></a></td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+<%- include('../partials/admin-foot') %>

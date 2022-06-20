@@ -1,0 +1,184 @@
+<%- include('../partials/admin-head') %>
+  <%- include('../partials/admin-sidebar') %>
+    <%- include('../partials/admin-navbar') %>
+      <h6 class="mt-4 mb-3">Edit Products</h6>
+      <section class="col-xl-10">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <form method="post" action="/admin/update-products/<%=productDetails._id%>" enctype="multipart/form-data">
+
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row mb-4">
+                  <div class="col">
+
+                    <select class="custom-select" name="category" id="inputGroupSelect01" required>
+                      <option selected value="<%=productDetails.category%>">Choose Category</option>
+                      <% categories.forEach((x)=> { %>
+                        <option>
+                          <%=x.category %>
+                        </option>
+                        <% }) %>
+                    </select>
+                    <label class="form-label m-3" for="form6Example3">Category</label>
+                  </div>
+                  <div class="col ">
+                    <label class="form-label float-end ms-3" for="form6Example3"> Brand</label>
+                    <select class="custom-select float-end" name="brand" id="inputGroupSelect01" required>
+                      <option selected value="<%=productDetails.brand%>">Choose Brand</option>
+                      <% brands.forEach((x)=> { %>
+                        <option>
+                          <%=x.brand %>
+                        </option>
+                        <% }) %>
+
+
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                  <input type="text" id="form6Example3" class="form-control" value="<%=productDetails.title%>"
+                    name="title" />
+                  <label class="form-label" for="form6Example3">Title</label>
+                </div>
+
+
+
+
+                <!-- spects input -->
+                <div class="row mb-4">
+                  <div class="col">
+                    <div class="form-outline">
+                      <div class="form-outline mb-4">
+                        <input type="text" id="form6Example6" class="form-control" name="specs"
+                          value="<%=productDetails.specs[0]%>" />
+                        <label class="form-label" for="form6Example7">Processors</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input type="text" id="form6Example6" class="form-control" name="specs"
+                          value="<%=productDetails.specs[1]%>" />
+                        <label class="form-label" for="form6Example7">RAM</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input type="text" id="form6Example6" class="form-control" name="specs"
+                          value="<%=productDetails.specs[2]%>" />
+                        <label class="form-label" for="form6Example7">Storage</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input type="number" id="form6Example6" class="form-control" value="<%=productDetails.stock%>"
+                          name="stock" />
+                        <label class="form-label" for="form6Example6">Stock</label>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-outline">
+                      <div class="form-outline mb-4">
+                        <input type="text" id="form6Example6" class="form-control" name="specs"
+                          value="<%=productDetails.specs[3]%>" />
+                        <label class="form-label" for="form6Example7">OS</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input type="text" id="form6Example6" class="form-control" name="specs"
+                          value="<%=productDetails.specs[4]%>" />
+                        <label class="form-label" for="form6Example7">Colour</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input type="text" id="form6Example6" class="form-control" name="specs"
+                          value="<%=productDetails.specs[0]%>" />
+                        <label class="form-label" for="form6Example7">Size</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input type="number" id="form6Example5" class="form-control" name="mrp" value="<%=productDetails.mrp%>"/>
+                        <label class="form-label" for="form6Example5h">MRP</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input type="number" id="form6Example5" class="form-control" value="<%=productDetails.price%>"
+                          name="price" hidden/>
+                        <label class="form-label" for="form6Example5"hidden >Price</label>
+                      </div>
+
+
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                  <input type="text" id="form6Example4" class="form-control" value="<%=productDetails.description%>"
+                    name="description" />
+                  <label class="form-label" for="form6Example4">Description</label>
+                </div>
+                <!-- image -->
+
+                <div class="row mb-4">
+                  <div class="col">
+                    <div class="form-outline">
+                      <img id="img1view" class="m-3" style="width: 100px;height: 100px; "
+                        src="/uploads/<%=productDetails.image[0].image1%>" alt="">
+                      <input type="text" name="image1" style="display:none" value="<%=productDetails.image[0].image1%>">
+                      <input type="file" id="form6Example1" class="form-control" name="image1" onchange="viewImage1(event)" />
+                      <label class="form-label" for="form6Example1">Image 1 (Primary)</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-outline"><img id="img2view"class="m-3" style="width: 100px;height: 100px;"
+                        src="/uploads/<%=productDetails.image[1].image2%>" alt="">
+                      <input type="text" name="image2" style="display:none" value="<%=productDetails.image[1].image2%>">
+                      <input type="file" id="form6Example2" class="form-control" name="image2" onchange="viewImage2(event)"/>
+                      <label class="form-label" for="form6Example2">Image 2</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-4">
+                  <div class="col">
+                    <div class="form-outline">
+                      <img id="img3view"class="m-3" style="width: 100px;height: 100px;"
+                        src="/uploads/<%=productDetails.image[2].image3%>" alt="">
+                      <input type="text" name="image3" style="display:none" value="<%=productDetails.image[2].image3%>">
+                      <input type="file" id="form6Example1" class="form-control" name="image3"onchange="viewImage3(event)" />
+                      <label class="form-label" for="form6Example1">Image 3</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-outline">
+                      <img id="img4view" class="m-3" style="width: 100px;height: 100px;"
+                        src="/uploads/<%=productDetails.image[3].image4%>" alt="">
+                      <input type="text" name="image4" style="display:none" value="<%=productDetails.image[3].image4%>">
+                      <input type="file" id="form6Example2" class="form-control" name="image4"onchange="viewImage4(event)" />
+                      <label class="form-label" for="form6Example2">Image 4</label>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4 float-end">Update</button>
+
+              </form>
+              <a class="btn btn-primary" href="/admin/view-products">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <script>
+        function viewImage1(event){
+          document.getElementById('img1view').src=URL.createObjectURL(event.target.files[0])
+        }
+        function viewImage2(event){
+          document.getElementById('img2view').src=URL.createObjectURL(event.target.files[0])
+        }
+        function viewImage3(event){
+          document.getElementById('img3view').src=URL.createObjectURL(event.target.files[0])
+        }
+        function viewImage4(event){
+          document.getElementById('img4view').src=URL.createObjectURL(event.target.files[0])
+        }
+
+      </script>
+      <%- include('../partials/admin-foot') %>

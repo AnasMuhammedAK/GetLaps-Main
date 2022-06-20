@@ -1,0 +1,280 @@
+<%- include('../partials/head') %>
+	<%- include('../partials/navbarmain') %>
+
+
+
+
+		<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+					<% banners.forEach((x)=>{%>
+						<li style="background-image: url('/uploads/<%=x.image%>');">
+							<div class="overlay"></div>
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-sm-6 offset-sm-3 text-center slider-text">
+										<div class="slider-text-inner">
+											<div class="desc">
+												<h1 class="head-1">
+													<%=x.bannerName%>
+												</h1>
+												<h2 class="head-2">
+													<%=x.offer%>
+												</h2>
+												<h2 class="head-3">Shop Now</h2>
+												<p class="category"><span>
+														<%=x.description%>
+													</span></p>
+												<p><a href="/productCategory/<%=x.link%>" class="btn btn-primary">Shop
+														Collections</a></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<%})%>
+							<!-- <li style="background-image: url('/wallpaper/colorful_laptop_with_black_background_4k_hd_black_aesthetic-1920x1080.jpg');">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-sm-6 offset-sm-3 text-center slider-text">
+									<div class="slider-text-inner">
+										<div class="desc">
+											<h1 class="head-1">Huge</h1>
+											<h2 class="head-2">Sale</h2>
+											<h2 class="head-3"><strong class="font-weight-bold">20%</strong> Off</h2>
+											<p class="category"><span>Big sale on Student's Laptop</span></p>
+											<p><a href="/shop" class="btn btn-primary">Shop Collection</a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li style="background-image: url('/wallpaper/laptop-colorful-screen-dark.jpg');">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-sm-6 offset-sm-3 text-center slider-text">
+									<div class="slider-text-inner">
+										<div class="desc">
+											<h1 class="head-1">New</h1>
+											<h2 class="head-2">Arrival</h2>
+											<h2 class="head-3">up to <strong class="font-weight-bold">30%</strong> off
+											</h2>
+											<p class="category"><span>New Performens Laptop for Office Use</span></p>
+											<p><a href="/shop" class="btn btn-primary">Shop Collection</a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li> -->
+				</ul>
+			</div>
+		</aside>
+		<div class="colorlib-intro mb-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<h3 class="">Shop from a wide range of laptops from HP, Dell, Lenovo, Realme, Asus, Acer,
+							Vaio & more at India's Best Online Shopping Store.</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<% posters1.forEach((x)=>{%>
+				<div class="col-sm-12 mt-3">
+					<div class="card bg-dark text-white">
+						<img  src="/uploads/<%=x.image%>"
+							class="card-img img-fluid" alt="...">
+						<div class="card-img-overlay">
+							<!-- <h5 class="card-title">Card title</h5>
+							<p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+								additional content. This content is a little bit longer.</p>
+							<p class="card-text">Last updated 3 mins ago</p> -->
+						</div>
+					</div>
+				</div>
+				<%})%>
+			</div>
+			
+		</div>
+		<!-- <div class="container">
+			<div class="row">
+				<div class="col-sm-6 mt-3">
+					<div class="card bg-dark text-white">
+						<img src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/Laptops/D24645474_IN_PC-Gamezone-Re-Vamp_1242x450_2.jpg"
+							class="card-img" alt="...">
+						<div class="card-img-overlay">
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 mt-3">
+					<div class="card bg-dark text-white">
+						<img src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/Laptops/D24645474_IN_PC-Gamezone-Re-Vamp_1242x450.jpg"
+							class="card-img" alt="...">
+						<div class="card-img-overlay">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+			
+		
+
+		<div class="colorlib-product ">
+			<div class="container ">
+				<hr>
+				<div class="row">
+					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+						<h2>New Products</h2>
+						
+					</div>
+					
+				</div>
+				
+				<div class="row row-pb-md">
+					<% newProducts.forEach((x)=> { %>
+						<div class="col-lg-3 mb-4 text-center ">
+							<div style="border:solid 1px ;border-radius: 5%;" class="product-entry ">
+								<a href="/view-products/<%=x._id%>" class="prod-img ">
+									<img src="/uploads/<%=x.image[0].image1%>" class="img-fluid " style="height: 280px;"
+										alt="Free html5 bootstrap 4 template">
+								</a>
+								<div class="desc">
+									<h2><a href="#">
+											<%=x.title%>
+										</a></h2>
+									<p>
+										<%=x.brand%> - <%=x.category%>
+									</p>
+									<div class="text-warning">
+
+										<div class="rating">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+										</div>
+
+									</div>
+									<span class="price"><strong>Price : RS <%=x.price%></strong></span>
+									<span class="price"><del>MRP : RS <%=x.mrp%></del> </span>
+								</div>
+							</div>
+						</div>
+						<% }) %>
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<p><a href="/shop" class="btn btn-primary btn-lg">Shop All Products</a></p>
+					</div>
+				</div>
+				<!-- ---------------------------------------------------------------------- -->
+				<hr>
+				<div class="row">
+					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+						<h2>Gaming Laptops</h2>
+					</div>
+				</div>
+				<div class="row row-pb-md">
+					<% gamingLap.forEach((x)=> { %>
+						<div class="col-lg-3 mb-4 text-center ">
+							<div style="border:solid 1px ;border-radius: 5%;" class="product-entry ">
+								<a href="/view-products/<%=x._id%>" class="prod-img ">
+									<img src="/uploads/<%=x.image[0].image1%>" class="img-fluid " style="height: 280px;"
+										alt="Free html5 bootstrap 4 template">
+								</a>
+								<div class="desc">
+									<h2><a href="#">
+											<%=x.title%>
+										</a></h2>
+									<p>
+										<%=x.brand%> - <%=x.category%>
+									</p>
+									<div class="text-warning">
+
+										<div class="rating">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+										</div>
+
+									</div>
+									<span class="price"><strong>Price : RS <%=x.price%></strong></span>
+									<span class="price"><del>MRP : RS <%=x.mrp%></del> </span>
+								</div>
+							</div>
+						</div>
+						<% }) %>
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<p><a href="/shop" class="btn btn-primary btn-lg">Shop All Products</a></p>
+					</div>
+				</div>
+				<hr>
+			</div>
+		</div>
+		
+			
+			
+		<div class="container">
+			<div class="row">
+				<% posters2.forEach((x)=>{%>
+				<div class="col-sm-12 mt-3">
+					<div class="card bg-dark text-white">
+						<img  src="/uploads/<%=x.image%>"
+							class="card-img img-fluid" alt="...">
+						<div class="card-img-overlay">
+							<!-- <h5 class="card-title">Card title</h5>
+							<p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+								additional content. This content is a little bit longer.</p>
+							<p class="card-text">Last updated 3 mins ago</p> -->
+						</div>
+					</div>
+				</div>
+				<%})%>
+			</div>
+			
+		</div>
+		
+		<div class="colorlib-partner">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
+						<h2>Trusted Brands</h2>
+					</div>
+				</div>
+				<div class="row">
+
+					<% brands.forEach((x)=> { %>
+						<div class="col partner-col text-center mt-3">
+							<a href="/productBrand/<%=x.brand%>">
+								<img style="width: 300px;" src="/uploads/<%=x.image%>" class="img"
+									alt="Free html4 bootstrap 4 template">
+							</a>
+						</div>
+
+						<%})%>
+
+				</div>
+			</div>
+		</div>
+		<!-- --------footer--------------- -->
+		<%- include('../partials/userfooter') %>
+			<!-- --------footer--------------- -->
+
+			<div class="gototop js-top">
+				<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+			</div>
+			<%- include('../partials/foot') %>

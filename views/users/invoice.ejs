@@ -1,0 +1,183 @@
+<%- include('../partials/head') %>
+    <%- include('../partials/navbarmain') %>
+        <style>
+            .start {
+                background: #fff;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <section id="invoice">
+            <div class="container start">
+                <center>
+                    <h3>Invoice</h3>
+                </center>
+    
+                <div class="row" >
+    
+                    <div class="col-12">
+                        <div style="border-radius: 30px;" class="card border" >
+                            <div class="card-body p-0">
+                                <div class="row p-5">
+                                    <div class="col-md-3">
+                                        <h2>GetLaps</h2>
+                                    </div>
+    
+                                    <div class="col-md-6 text-center">
+                                        <p class="font-weight-bold mb-1">Invoice #<%=order._id%>
+                                        </p>
+                                        <p class="text-muted">Due to: <%=order.date%>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3 text-right">
+                                        <button style="background-color: white" onclick="generatePDF()" id="dbtn"
+                                            class="btn  mb-2 ml-auto mr-5 float-end">Download as PDF</button>
+                                    </div>
+                                </div>
+    
+                                <hr class="my-2">
+    
+                                <div class="row pb-5 p-5">
+                                    <div class="col-md-6">
+                                        <p class="font-weight-bold mb-4">Client Information</p>
+                                        <p class="mb-1">
+                                            <%=order.deliveryDetails.userName%>
+                                        </p>
+    
+                                        <p class="mb-1">
+                                            <%=order.deliveryDetails.address%>
+                                        </p>
+                                        <p class="mb-1">
+                                            <%=order.deliveryDetails.mobile%>
+                                        </p>
+                                        <p class="mb-1">
+                                            <%=order.deliveryDetails.pincode%>
+                                        </p>
+                                    </div>
+    
+                                    <div class="col-md-6 text-right">
+                                        <p class="font-weight-bold mb-4">Payment Details</p>
+                                        <p class="mb-1"><span class="text-muted">Payment Type: </span>
+                                            <%=order.paymentMethod%>
+                                        </p>
+                                        <p class="mb-1"><span class="text-muted">Name: </span>
+                                            <%=order.deliveryDetails.userName%>
+                                        </p>
+                                    </div>
+                                </div>
+    
+                                <div class="row pr-5 pl-5 mb-5">
+                                    <div class="col-md-12" style="overflow-x:auto;">
+                                        <table class="table" id="invoice">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border-0 text-uppercase small font-weight-bold">No</th>
+                                                    <th class="border-0 text-uppercase small font-weight-bold">Item</th>
+                                                    <th class="border-0 text-uppercase small font-weight-bold">Type</th>
+                                                    <th class="border-0 text-uppercase small font-weight-bold">Quantity</th>
+                                                    <th class="border-0 text-uppercase small font-weight-bold">Unit Cost
+                                                    </th>
+                                                    <th class="border-0 text-uppercase small font-weight-bold">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% products.forEach((x)=> { %>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>
+                                                            <%=x.product.title %>
+                                                        </td>
+                                                        <td>
+                                                            <%=x.product.category %>
+                                                        </td>
+                                                        <td>
+                                                            <%=x.quantity %>
+                                                        </td>
+                                                        <td>₹<%=x.product.price %>
+                                                        </td>
+                                                        <td>₹<%=x.subtotal %>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+    
+                                <div style="background-color: rgb(121, 121, 121); border-bottom-left-radius: 30px;border-bottom-right-radius: 30px;"
+                                    class="d-flex flex-row-reverse  text-white p-4">
+                                    <div class="py-3 px-5 text-right">
+                                        <div class="mb-2">Grand Total</div>
+                                        <div class="h2 font-weight-light">₹<%=order.totalAmount %>
+                                        </div>
+                                    </div>
+    
+                                    <div class="py-3 px-5 text-right">
+                                        
+                                        <%if(order.discount !="" ){%>
+                                            <div class="mb-2">Discount</div>
+                                            <div class="h2 font-weight-light">₹<%=order.discount %>
+                                            </div>
+                                            <%}else{%>
+                                                <div class="h2 font-weight-light"></div>
+                                                <%}%>
+                                    </div>
+    
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </section>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+            integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            function generatePDF() {
+                
+                const element = document.getElementById('invoice');
+                var opt = {
+                    margin: 1,
+                    filename: 'GetLaps-Invoice.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'letter', orientation: 'portrait' }
+                };
+                html2pdf().set(opt).from(element).save("GetLaps-Invoice.pdf");
+                $('#dbtn').hide()
+            }
+        </script>
+        <!-- <script>
+            function generatePDF() {
+
+                const element = document.getElementById('invoice');
+                html2pdf().from(element).set({
+                    margin: [1, 0, 0, 0],
+                    filename: 'samplepdf.pdf',
+                    pageBreak: { mode: 'css', before: '#nextpage1' },
+                    jsPDF: { orientation: 'landscape', unit: 'in', format: 'letter' }
+                }).toPdf().get('pdf').then(function (pdf) {
+                    var totalPages = pdf.internal.getNumberOfPages();
+
+                    for (i = 1; i <= totalPages; i++) {
+                        pdf.setPage(i);
+                        pdf.setFontSize(10);
+                        pdf.setTextColor(150);
+                        pdf.text('Page ' + i + ' of ' + totalPages, (pdf.internal.pageSize.getWidth() / 2.25), (pdf.internal.pageSize.getHeight() - 8));
+
+
+                    }
+                }).save()
+            }
+        </script> -->
+        <!-- --------footer--------------- -->
+        <%- include('../partials/userfooter') %>
+            <!-- --------footer--------------- -->
+
+
+            <%- include('../partials/foot') %>

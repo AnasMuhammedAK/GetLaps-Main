@@ -1,0 +1,179 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbarmain') %>
+<div class="colorlib-loader"></div>
+
+	<div id="page">
+		
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="bread"><span><a href="/">Home</a></span> / <span>Order Complete</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="colorlib-product">
+			<div class="container">
+				<div class="container mt-5 ">
+					<div class="row ">
+					  <div style="margin: auto;border-radius: 20px;" class="col-12 col-md-10 hh-grayBox pt45 pb20 text-center">
+						<div class="row justify-content-between">
+						  <div class="order-tracking">
+							<span class="is-complete"></span>
+							<p>Shopping Cart<br><span></span></p>
+						  </div>
+						  <div class="order-tracking">
+							<span class="is-complete"></span>
+							<p>Checkout<br><span></span></p>
+						  </div>
+						  <div class="order-tracking">
+							<span class="is-complete"></span>
+							<p>Order Complete<br><span></span></p>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				<div class="row">
+					<div class="col-sm-10 offset-sm-1 text-center">
+						<strong><p class="icon-addcart"><span><i class="icon-check"></i></span></p></strong>
+						<h2 class="mb-4 text-success">Thank you for purchasing, Your order is complete</h2>
+						<p>
+							<a href="/shop"class="btn btn-primary  text-white "><i class="icon-shopping-cart"></i>  Continue Shopping</a>
+							<a href="/orders"class="btn btn-success text-white"></i>Go To Orders</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		 <!-- Footer Section Begin -->
+		 <%- include('../partials/userfooter') %>
+		 <!-- Footer Section End -->
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+	</div>
+	<style>
+				
+		
+		.hh-grayBox {
+		 
+		  margin-bottom: 20px;
+		  padding: 35px;
+		  margin-top: 20px;
+		}
+
+		.pt45 {
+		  padding-top: 45px;
+		}
+
+		.order-tracking {
+		  text-align: center;
+		  width: 33.33%;
+		  position: relative;
+		  display: block;
+		}
+
+		.order-tracking .is-complete {
+		  display: block;
+		  position: relative;
+		  border-radius: 50%;
+		  height: 30px;
+		  width: 30px;
+		  border: 0px solid #AFAFAF;
+		  background-color: #f7be16;
+		  margin: 0 auto;
+		  transition: background 0.25s linear;
+		  -webkit-transition: background 0.25s linear;
+		  z-index: 2;
+		}
+
+		.order-tracking .is-complete:after {
+		  display: block;
+		  position: absolute;
+		  content: '';
+		  height: 14px;
+		  width: 7px;
+		  top: -2px;
+		  bottom: 0;
+		  left: 5px;
+		  margin: auto 0;
+		  border: 0px solid #AFAFAF;
+		  border-width: 0px 2px 2px 0;
+		  transform: rotate(45deg);
+		  opacity: 0;
+		}
+
+		.order-tracking.completed .is-complete {
+		  border-color: #27aa80;
+		  border-width: 0px;
+		  background-color: #27aa80;
+		}
+
+		.order-tracking.completed .is-complete:after {
+		  border-color: #fff;
+		  border-width: 0px 3px 3px 0;
+		  width: 7px;
+		  left: 11px;
+		  opacity: 1;
+		}
+
+		.order-tracking p {
+		  color: #A4A4A4;
+		  font-size: 16px;
+		  margin-top: 8px;
+		  margin-bottom: 0;
+		  line-height: 20px;
+		}
+
+		.order-tracking p span {
+		  font-size: 14px;
+		}
+
+		.order-tracking.completed p {
+		  color: #000;
+		}
+
+		.order-tracking::before {
+		  content: '';
+		  display: block;
+		  height: 3px;
+		  width: calc(100% - 40px);
+		  background-color: #f7be16;
+		  top: 13px;
+		  position: absolute;
+		  left: calc(-50% + 20px);
+		  z-index: 0;
+		}
+
+		.order-tracking:first-child:before {
+		  display: none;
+		}
+
+		.order-tracking.completed:before {
+		  background-color: #27aa80;
+		}
+	  </style>
+
+	  
+
+	  <script>
+		var foo = "completed";
+		var div = document.getElementsByClassName("order-tracking")
+		if (foo == "cart") {
+		  div[0].classList.add('completed')
+		} else if (foo == "checkout") {
+		  div[0].classList.add('completed')
+		  div[1].classList.add('completed')
+		} else if (foo == "completed") {
+		  div[0].classList.add('completed')
+		  div[1].classList.add('completed')
+		  div[2].classList.add('completed')
+		}
+	  </script>
+<%- include('../partials/foot') %>

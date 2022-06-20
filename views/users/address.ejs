@@ -1,0 +1,189 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navbarmain') %>
+<%- include('../partials/user-dash') %>
+            <div class="col-lg-8">
+                
+                
+                <div class="card">
+                    
+                       
+                    
+                    
+                    <% if(address!=""){%>
+                        <% address.forEach((x) => { %> 
+                            <div class="card-body"> 
+                                <hr>
+                                
+                                
+        
+                               
+
+                               
+                                <a class="float-end m-1 mt-2 delete-button" href="/delete-address/<%=x.addressId%>"><img style="width: 30px;height: 30px;" src="https://cdn-icons-png.flaticon.com/512/1828/1828851.png" alt=""></a>
+                                <a href="/edit-address/<%=x.addressId%>" class=" float-end m-1"><img style="width: 35px;" src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" alt=""></a> 
+                              
+                                <div class="row mb-3 mt-4">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">FIRST NAME</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">: <%=x.fname%></h6>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">LAST NAME</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">: <%=x.lname%></h6>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">HOUSE NAME</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">: <%=x.house%></h6>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">LOCAL PLACE</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">: <%=x.localplace%></h6>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">TOWN/CITY</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">: <%=x.towncity%></h6>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">DISTRICT</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">: <%=x.district%></h6>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">STATE</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">: <%=x.state%></h6>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">PIN CODE</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">: <%=x.pin%></h6>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">E-MAIL ADDRESS</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">:<%=x.email%></h6>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">MOBILE NUMBER</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">: <%=x.mobile%></h6>
+                                    </div>
+                                </div>
+                                
+                                
+                               
+                                
+                                
+                                
+                                
+                            </div>
+                            <% }) %>
+                        
+                            <%}%>
+                    <hr>
+                    <a href="/add-address" style="width: 25%;margin: auto;" class="btn btn-success px-4 mb-3 mt-3">Add New Address</a>
+                    <hr>
+                    
+                </div>
+               
+                    <!-- <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="d-flex align-items-center mb-3">Project Status</h5>
+                                <p>Web Design</p>
+                                <div class="progress mb-3" style="height: 5px">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p>Website Markup</p>
+                                <div class="progress mb-3" style="height: 5px">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p>One Page</p>
+                                <div class="progress mb-3" style="height: 5px">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p>Mobile Template</p>
+                                <div class="progress mb-3" style="height: 5px">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p>Backend API</p>
+                                <div class="progress" style="height: 5px">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!--Sweet Alert CDN-->
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                // delete popup
+                $('.delete-button').on('click', function (e) {
+                    e.preventDefault();
+                    var self = $(this);
+                    console.log(self.data('title'));
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                            location.href = self.attr('href');
+                        }
+                    })
+
+                })
+
+            </script>
+ <!-- Footer Section Begin -->
+ <%- include('../partials/userfooter') %>
+ <!-- Footer Section End -->
+<%- include('../partials/foot') %>

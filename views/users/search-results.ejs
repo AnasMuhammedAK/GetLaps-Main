@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GetLaps</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="/client/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/client/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/client/css/elegant-icons.css" type="text/css" />
+    <link rel="stylesheet" href="/client/css/jquery-ui.min.css" type="text/css" />
+    <link rel="stylesheet" href="/client/css/magnific-popup.css" type="text/css" />
+    <link rel="stylesheet" href="/client/css/owl.carousel.min.css" type="text/css" />
+    <link rel="stylesheet" href="/client/css/slicknav.min.css" type="text/css" />
+    <link rel="stylesheet" href="/client/css/style.css" type="text/css" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
+    <!-- ajax for immediate response for addtocart btn -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--Sweet Alert CDN-->
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <%- include('../partials/navbarmain') %>
+        <!-- Page Preloder -->
+        <div id="preloder">
+            <div class="loader"></div>
+        </div>
+
+
+
+
+
+        <!-- Breadcrumb Begin -->
+        <div class="breadcrumb-option">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="breadcrumb__links">
+                            <a href="/"><i class="fa fa-home"></i> Home</a>
+                            <span>Shop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+
+        <!-- Shop Section Begin -->
+        <section style="min-height: 80vh;" class="shop spad">
+            <div class="container">
+                <div class="row">
+                    <%- include('../partials/user-filter') %>
+                        <div class="col-lg-9 col-md-9">
+                            <div class="row">
+                                <% products.forEach((x)=> { %>
+                                    
+                                        <div style="min-width: 280px;" class="card col-lg-3 col-11 col-sm-10 col-md-8 m-4 text-center">
+                                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                                <img style="height: 250px;" src="/uploads/<%=x.image[0].image1%>"
+                                                    class="img-fluid" />
+                                                <a href="/view-products/<%=x._id%>">
+                                                    <div class="mask"
+                                                        style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                                </a>
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <%=x.title%>
+                                                </h5>
+                                                <div class="text-warning">
+
+                                                    <div class="rating">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+
+                                                </div>
+                                                <p class="card-text"><strong>Price : ₹<%=x.price%></strong><br> <del> MRP : ₹<%=x.mrp%></del>
+                                                </p>
+                                                <% if(x.stock<1){%>
+                                                <p class="text-danger"><strong>Stockout</strong>
+                                                </p>
+                                                <%}else{%>
+                                                    <p class="text-success"><strong>Only ' <%=x.stock%> ' Product Left</strong>
+                                                    </p>
+                                                    <%}%>
+                                                <button class="btn btn-danger"
+                                                    onclick="addToWishlist('<%=x._id%>')">+Wishlist</button>
+                                                <button class="btn btn-success"
+                                                    onclick="addToCart('<%=x._id%>')">+Cart</button>
+                                            </div>
+                                        </div>
+
+                                  
+
+                                    <% }) %>
+
+                                        <!-- <div class="col-lg-4 col-md-6">
+                            <div class="product__item sale">
+                                <div class="product__item__pic set-bg" data-setbg="/client/img/shop/shop-9.jpg">
+                                    <div class="label">Sale</div>
+                                    <ul class="product__hover">
+                                        <li><a href="img/shop/shop-9.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">Water resistant zips backpack</a></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
+                                </div>
+                            </div>
+                        </div> -->
+                                        <% if(products.length> 0){ %>
+                                            <!-- <div class="col-lg-12 text-center">
+                                                <div class="pagination__option">
+                                                    <a href="#">1</a>
+                                                    <a href="#">2</a>
+                                                    <a href="#">3</a>
+                                                    <a href="#"><i class="fa fa-angle-right"></i></a>
+                                                </div>
+                                            </div> -->
+                                            <% }else{ %>
+                                                <a href="/shop"><div class="container">
+                                                    <div class="col m-auto">
+                                                        <img class="image-fluid" style=" width: 50rem;" src="https://www.itinerantnotes.com/blog-theme/images/empty.gif" alt="">
+                                                    </div>
+                                                </div></a>
+                                                <% } %>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </section>
+        <!-- Shop Section End -->
+
+
+        <!-- Footer Section Begin -->
+        <%- include('../partials/userfooter') %>
+            <!-- Footer Section End -->
+
+
+            <script>
+                function addToCart(proId) {
+                    $.ajax({
+                        url: "/add-tocart/" + proId,
+                        methode: "get",
+                        success: (Response) => {
+
+                            if (Response.newProduct) {
+                                Swal.fire({
+                                    position: 'top-center',
+                                    icon: 'success',
+                                    title: 'Product Added To Cart',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                })
+                                //location.reload()
+                                let count = $('#cart-count').html()
+                                count = parseInt(count) + 1
+                                $("#cart-count").html(parseInt(count))
+                            } else if (Response.oldProduct) {
+                                Swal.fire({
+                                    position: 'top-center',
+                                    icon: 'success',
+                                    title: 'Product Added To Cart',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                })
+                            }
+                        }
+                    })
+                }
+                function addToWishlist(proId) {
+                    $.ajax({
+                        url: "/addToWishlist/" + proId,
+                        methode: "get",
+                        success: (Response) => {
+
+                            if (Response.newProduct) {
+                                Swal.fire({
+                                    position: 'top-center',
+                                    icon: 'success',
+                                    title: 'Product Added To Wishlist',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                })
+                                //location.reload()
+                                let count = $('#wishlist-count').html()
+                                count = parseInt(count) + 1
+                                $("#wishlist-count").html(parseInt(count))
+
+                            } else if (Response.oldProduct) {
+                                Swal.fire({
+                                    position: 'top-center',
+                                    icon: 'success',
+                                    title: 'Product Removed From wishlist',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                })
+                                let count = $('#wishlist-count').html()
+                                count = parseInt(count) - 1
+                                $("#wishlist-count").html(parseInt(count))
+
+                            }
+                        }
+                    })
+                }
+
+            </script>
+
+
+            <!-- Js Plugins -->
+            <script src="/client/js/jquery-3.3.1.min.js"></script>
+      <script src="/client/js/bootstrap.min.js"></script>
+      <script src="/client/js/jquery.magnific-popup.min.js"></script>
+      <script src="/client/js/jquery-ui.min.js"></script>
+      <script src="/client/js/mixitup.min.js"></script>
+      <script src="/client/js/jquery.countdown.min.js"></script>
+      <script src="/client/js/jquery.slicknav.js"></script>
+      <script src="/client/js/owl.carousel.min.js"></script>
+      <script src="/client/js/jquery.nicescroll.min.js"></script>
+      <script src="/client/js/main.js"></script>
+            <!-- MDB -->
+            <!-- <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script> -->
+
+        </body>
+
+        </html>

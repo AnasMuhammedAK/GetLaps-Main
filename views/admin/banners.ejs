@@ -1,0 +1,88 @@
+<%- include('../partials/admin-head') %>
+  <%- include('../partials/admin-sidebar') %>
+    <%- include('../partials/admin-navbar') %>
+<section style="padding-bottom: 100px;">
+    <ol class="breadcrumb">
+        <li class="pr-3"><a href="/admin" style="text-decoration: none;">Home </a></li>
+        <li class="active">/ Banners</li>
+    </ol>
+    <div class="slider-area">
+       
+    </div>
+    
+    <table class="table" id="adminTable">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <a href="/admin/addBanner" class="btn btn-primary ml-auto" style="margin-top: 20px;">Add New
+                    Banner</a>
+            </div>
+        </div>
+        <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Banner Name</th>
+                <th scope="col">Banner</th>
+                <th scope="col">Offer</th>
+                <th scope="col">Description</th>
+                <th scope="col">Link</th>
+                <th scope="col">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% banners.forEach((x)=>{%>
+
+            
+            <tr>
+                <td scope="row"></td>
+                <td><%=x.bannerName%></td>
+                <td>
+                    <img style="height: 50px;width:80px" src="/uploads/<%=x.image%>">
+                </td>
+                <td><%=x.offer%></td>
+                <td><%=x.description%></td>
+                <td><%=x.link%></td>
+                <td><a href="/admin/editBanner/<%=x._id%>" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+
+                    <a class="btn btn-danger delete-button " href="/admin/deleteBanner/<%=x._id%>" name="<%=x.bannerName%>"
+                        ><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+       <% })%>
+
+        </tbody>
+    </table>
+</section>
+<hr>
+
+            <!--Sweet Alert CDN-->
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // delete popup
+    $('.delete-button').on('click', function (e) {
+        e.preventDefault();
+        var self = $(this);
+        console.log(self.data('title'));
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                location.href = self.attr('href');
+            }
+        })
+
+    })
+
+</script>
+
+<%- include('../partials/admin-foot') %>

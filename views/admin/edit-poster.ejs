@@ -1,0 +1,114 @@
+<%- include('../partials/admin-head') %>
+    <%- include('../partials/admin-sidebar') %>
+        <%- include('../partials/admin-navbar') %>
+            <section style="padding-bottom: 100px;">
+                <ol class="breadcrumb">
+                    <li class="pr-3"><a href="/admin" style="text-decoration: none;">Home </a></li>
+                    <li class="active">/ Edit Poster</li>
+                </ol>
+                <div class="slider-area">
+
+                </div>
+
+
+            </section>
+
+
+            <section id="add">
+                <div class="half">
+                    <div class="bg order-1 order-md-2" style="background-image: url('/adminLogin/images/bg_1.jpg');">
+                    </div>
+
+                    <div class="contents order-2 order-md-1">
+                        <div class="container">
+                            <div class="row align-items-center justify-content-center">
+
+                                <div style="margin: auto;background-color: white;border-radius: 30px;" class="col-md-6 p-5">
+                                    <div class="text-center mb-5">
+                                        <h3>Edit <strong>Poster</strong></h3>
+
+                                    </div>
+                                    <form action="/admin/editPoster/<%=banner._id%>" method="POST" enctype="multipart/form-data"
+                                        style="padding-top: 40px;" id="add-banner">
+
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="inputName">Poster Name</label>
+                                                <input type="text" value="<%=banner.bannerName%>" class="form-control" id="inputName"
+                                                    name="bannerName">
+                                            </div>
+
+
+                                            <div class="form-group col-md-12">
+                                                <label for="inputDescription">Description</label>
+                                                <input type="text" value="<%=banner.description%>" class="form-control" id="inputDescription"
+                                                    name="description">
+                                            </div>
+                                        </div>
+                                        <div class="row ">
+                                            <div class="form-group mt-2 col-md-12">
+                                                <label for="inputOffer">Offer details</label>
+                                                <input type="text" value="<%=banner.offer%>" class="form-control" id="inputOffer" name="offer">
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="mt-5 col-md-12">
+                                            <div class="form-group mt-2 col-md-4">
+                                                <label for="exampleFormControlFile3">Poster Image</label>
+                                                <img src="" style="width:auto;height:50px;display:none"
+                                                    id="imgView"><br><br>
+                                                <input type="file" class="form-control" value="<%=banner.limage%>" name="image"
+                                                    id="exampleFormControlFile3" style="width: 250px;" accept="image/*"
+                                                     onchange="viewImage(event)">
+                                                    <input type="text" value="<%=banner.image%>" name="image" style="display: none;">
+                                            </div>
+                                        </div>
+
+
+                                       
+                                        <p class="text-warning text-center" style="display: none;" id="errMsg">Only
+                                            Image is
+                                            Accepted</p>
+
+                                        <div class="col-md-12">
+                                            <div id="image-box" style="width: 500px; height: 500px; display: none;">
+                                            </div>
+                                            <button class="btn btn-primary mt-3" type="button" style="display: none;"
+                                                id="crop-btn">Crop</button>
+                                        </div>
+                                        <div class="align-middle d-flex "  style="width: 100%;margin: auto;">
+                                            <a style="width: 50%;" class="btn btn-primary mt-5 me-1" href="/admin/banner">Cancel</a>
+                                            <button style="width: 50%;" id="confirm-btn" type="submit"
+                                                class="btn mt-5 ms-1 btn-success align-middle">Update</button> 
+                                                
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+
+            <script>
+                function viewImage(event) {
+                    document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+                    let file = event.target.files[0].name
+                    let extension = file.split('.').pop()
+                    if (extension == 'jpeg' || extension == 'png' || extension == 'jpg') {
+                        $('#imgView').show()
+                        $('#sub').show()
+                        $('#errMsg').hide()
+                    }
+                    else {
+                        $('#sub').hide()
+                        $('#errMsg').show()
+                    }
+                }
+            </script>
+            <%- include('../partials/admin-foot') %>

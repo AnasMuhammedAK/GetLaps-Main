@@ -1,0 +1,504 @@
+<%- include('../partials/admin-head') %>
+  <%- include('../partials/admin-sidebar') %>
+    <%- include('../partials/admin-navbar') %>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+      <div class="text-center mt-5" style="margin: auto;">
+        <form action="/admin/getChartDatas" id="" method="post">
+          <label for=""><strong>Sart Date</strong></label>
+          <input type="Date" name="startDate" id="">
+          <label for=""><strong>End Date</strong></label>
+          <input type="Date" name="endDate" id="">
+          <button class="btn btn-primary" type="submit">Get</button>
+        </form>
+      </div>
+      <div class="text-center mt-5" style="margin: auto;"><h3>Last Week Reports</h3> <hr>
+      </div>
+      <!-- Sale & Revenue Start -->
+      <div class="container-fluid pt-4 px-4">
+
+        <div class="row g-4">
+          <div class="col-sm-6 col-xl-3">
+            <div class="bg-white rounded d-flex align-items-center justify-content-between p-4 ">
+              <i class="fa fa-chart-line fa-3x text-primary"></i>
+              <div class="ms-3">
+                <p class="mb-2">Total Orders</p>
+                <h6 class="mb-0"><span id="totalOrders">0</span></h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="bg-white rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fa fa-chart-bar fa-3x text-primary"></i>
+              <div class="ms-3">
+                <p class="mb-2">Total Sale</p>
+                <h6 class="mb-0"><span id="totalSales">0</span></h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="bg-white rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fa fa-chart-area fa-3x text-primary"></i>
+              <div class="ms-3">
+                <p class="mb-2">Total Revenue</p>
+                <h6 class="mb-0"><span id="totalRevenue">0</span></h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="bg-white rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fa fa-chart-pie fa-3x text-primary"></i>
+              <div class="ms-3">
+                <p class="mb-2">Total Refund</p>
+                <h6 class="mb-0"><span id="totalRefund">0</span></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sale & Revenue End -->
+
+
+      <!-- Sales Chart Start -->
+      <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-light text-center rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Brand wise Sales</h6>
+                <a href=""></a>
+              </div>
+              <canvas id="myChart1"></canvas>
+            </div>
+          </div>
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-light text-center rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Payment Method</h6>
+                <a href=""></a>
+              </div>
+              <canvas id="myChart33"></canvas>
+            </div>
+          </div>
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-light text-center rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0"> Sales</h6>
+                <a href=""></a>
+              </div>
+              <canvas id="myChart2"></canvas>
+            </div>
+          </div>
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-light text-center rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">orders</h6>
+                <a href="/admin/view-orders">Show All</a>
+              </div>
+              <canvas id="myChart4"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sales Chart End -->
+
+
+      <!-- Recent Sales Start -->
+      <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <h4 class="mb-0">Recent Orders</h4>
+            <a href="">Show All</a>
+          </div>
+          <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+              
+              <thead>
+                <tr class="text-dark">
+                  <th scope="col">No</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Order-Id</th>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <% orders.forEach((x)=> { %>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td><%=x.date%></td>
+                  <td>#<%=x._id%></td>
+                  <td><%=x.deliveryDetails.userName%></td>
+                  <td>₹<%=x.totalAmount%></td>
+                  <td><%=x.paymentStatus%></td>
+                  <td><a class="btn btn-sm btn-primary" href="/admin/view-order-products/<%=x._id %>">Detail</a></td>
+                </tr>
+                
+              </tbody>
+              <% }) %>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Recent Sales End -->
+
+
+      <!-- Widgets Start -->
+      <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+          <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="h-100 bg-light rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <h4 class="mb-0">Recent Products</h4>
+                <a href="">Show All</a>
+              </div>
+              <% products.forEach((x)=> { %>
+              <div class="d-flex align-items-center border-bottom py-3">
+                <img class="rounded-circle flex-shrink-0" src="/uploads/<%=x.image[0].image1%>" alt="" style="width: 40px; height: 40px;">
+                <div class="w-100 ms-3">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-0"><%=x.title %></h6>
+                    <small><%=x.brand %></small>
+                  </div>
+                  <span><%=x.category%></span>
+                </div>
+              </div>
+              <% }) %>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="h-100 bg-light rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h4 class="mb-0">Calender</h4>
+                <a href="">Show All</a>
+              </div>
+              <div id="calender"></div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="h-100 bg-light rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h4 class="mb-0">Recent Users</h4>
+                <a href="">Show All</a>
+              </div>
+              <% users.forEach((x)=> { %>
+              <div class="d-flex align-items-center border-bottom py-2">
+                
+                <div class="w-100 ms-3">
+                  <div class="d-flex w-100 align-items-center justify-content-between">
+                    <span><%=x.fullname %></span>
+                   
+                  </div>
+                </div>
+              </div>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Widgets End -->
+
+
+      <!-- Footer Start -->
+      <div class="container-fluid pt-4 px-4">
+        <div class="bg-light rounded-top p-4">
+          <div class="row">
+            <div class="col-12 col-sm-6 text-center text-sm-start">
+              &copy; <a href="#">GetLaps</a>, All Right Reserved.
+            </div>
+            <div class="col-12 col-sm-6 text-center text-sm-end">
+              <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+              Designed By <a href="#">Muhammed Anas Ak</a>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer End -->
+      </div>
+      <!-- Content End -->
+
+     <!-- Back to Top -->
+      <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+      </div>
+
+
+      <script>
+        // $(document).ready(function () {
+        //   $("#getUpdate").submit((e) => {
+        //     e.preventDefault()
+        //     console.log('success3');
+        //     $.ajax({
+
+        //       url: '/admin/getChartData',
+        //       data: $('#getUpdate').serialize(),
+        //       method: 'post',
+        //       success: (response) => {
+        //         console.log(response, 'before passing');
+        //         allData(response)
+        //       }
+
+        //     })
+
+
+        //   })
+        // })
+        // allData(response)
+        // async function allData(response) {
+
+        //   console.log(response, 'reponse');
+        //   var ctx = document.getElementById('myChart2').getContext('2d');
+        //   var chart = new Chart(ctx, {
+        //     // The type of chart we want to create
+        //     type: 'bar',
+
+        //     // The data for our dataset
+        //     data: {
+        //       labels: response.dateArray,
+        //       datasets: [{
+        //         label: "last week dataset",
+        //         backgroundColor: ['rgb(128,233,30)', 'rgb(55, 99, 132)'],
+        //         borderColor: 'rgb(255, 99, 132)',
+        //         borderWidth: 1,
+        //         data: response.totalArray,
+        //       }]
+        //     },
+
+        //     // Configuration options go here
+        //     options: {
+        //       tooltips: {
+        //         mode: 'index'
+        //       },
+        //       title: {
+        //         display: true,
+        //         text: 'Earning in this Date'
+        //       },
+        //       legend: {
+        //         position: 'top'
+        //       }
+        //     }
+        //   });
+
+        //   var ctx = document.getElementById('myChart1').getContext('2d');
+        //   var chart = new Chart(ctx, {
+        //     // The type of chart we want to create
+        //     type: 'pie',
+
+        //     // The data for our dataset
+        //     data: {
+        //       labels: response.brandArray,
+        //       datasets: [{
+        //         label: "last week dataset",
+        //         backgroundColor: ['rgb(64,140,139)', 'rgb(97,207,209)'],
+        //         borderColor: 'rgb(255, 99, 132)',
+        //         borderWidth: 0,
+        //         data: response.sumArray,
+        //       }]
+        //     },
+
+        //     // Configuration options go here
+        //     options: {
+        //       tooltips: {
+        //         mode: 'index'
+        //       },
+        //       title: {
+        //         display: true,
+        //         text: 'Earning in this Week'
+        //       },
+        //       legend: {
+        //         position: 'top'
+        //       }
+        //     }
+        //   });
+
+
+
+        //   document.getElementById('totalOrders').innerHTML = response.orderCount
+        //   document.getElementById('totalSales').innerHTML = "₹ " + response.Sales
+        //   document.getElementById('totalRevenue').innerHTML = "₹ " + response.successPayment
+        //   document.getElementById('totalRefund').innerHTML = "₹ " + response.refund
+
+        //   var ctx = document.getElementById('myChart33').getContext('2d');
+        //   var myChart = new Chart(ctx, {
+        //     type: 'doughnut',
+        //     data: {
+        //       labels: ['COD', 'Razorpay'],
+        //       datasets: [{
+        //         label: 'Paymnet methods',
+        //         data: [response.cod, response.razorpay],
+        //         backgroundColor: [
+        //           'rgb(144,97,226)',
+        //           'rgba(54, 162, 235, 1)'
+        //         ],
+        //       }]
+        //     },
+        //     options: {
+        //       responsive: true,
+        //     },
+
+        //   });
+
+
+        //   var earning = document.getElementById('myChart4').getContext('2d');
+        //   var myChart = new Chart(earning, {
+        //     type: 'bar',
+        //     data: {
+        //       labels: ['Placed', 'Shipped', 'Delivered', 'Cancelled',],
+        //       datasets: [{
+        //         label: 'Order Status',
+        //         data: response.allOrderStatus,
+        //         backgroundColor: [
+        //           'rgba(255, 206, 86, 1)',
+        //           'rgba(54, 162, 235, 1)',
+        //           'rgba(60, 170, 70, 1)',
+        //           'rgba(255, 0, 0, 1)',
+
+        //         ],
+        //       }]
+        //     },
+        //     options: {
+        //       responsive: true,
+        //     }
+        //   });
+        // }
+
+ // --------------------------------------
+
+        async function forHome() {
+          console.log('success1');
+          var totalAmount = []
+          var totalDate = []
+          $.ajax({
+            url: '/admin/getChartData',
+            method: 'post',
+            success: (response) => {
+              console.log(response, 'reponse');
+              var ctx = document.getElementById('myChart2').getContext('2d');
+              var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'line',
+
+                // The data for our dataset
+                data: {
+                  labels: response.dateArray,
+                  datasets: [{
+                    label: "last week dataset",
+                    backgroundColor: ['rgb(128,233,30)', 'rgb(55, 99, 132)'],
+                    borderColor: 'rgb(255, 99, 132)',
+                    borderWidth: 1,
+                    data: response.totalArray,
+                  }]
+                },
+
+                // Configuration options go here
+                options: {
+                  tooltips: {
+                    mode: 'index'
+                  },
+                  title: {
+                    display: true,
+                    text: 'Earning in this Week'
+                  },
+                  legend: {
+                    position: 'top'
+                  }
+                }
+              });
+
+              var ctx = document.getElementById('myChart1').getContext('2d');
+              var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'pie',
+
+                // The data for our dataset
+                data: {
+                  labels: response.brandArray,
+                  datasets: [{
+                    label: "last week dataset",
+                    backgroundColor: ['rgb(64,140,139)', 'rgb(97,207,209)'],
+                    borderColor: 'rgb(255, 99, 132)',
+                    borderWidth: 0,
+                    data: response.sumArray,
+                  }]
+                },
+
+                // Configuration options go here
+                options: {
+                  tooltips: {
+                    mode: 'index'
+                  },
+                  title: {
+                    display: true,
+                    text: 'Earning in this Week'
+                  },
+                  legend: {
+                    position: 'top'
+                  }
+                }
+              });
+
+
+
+              document.getElementById('totalOrders').innerHTML = response.orderCount
+              document.getElementById('totalSales').innerHTML = "₹ " + response.Sales
+              document.getElementById('totalRevenue').innerHTML = "₹ " + response.successPayment
+              document.getElementById('totalRefund').innerHTML = "₹ " + response.refund
+
+              var ctx = document.getElementById('myChart33').getContext('2d');
+              var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                  labels: ['COD', 'Razorpay'],
+                  datasets: [{
+                    label: 'Paymnet methods',
+                    data: [response.cod, response.razorpay],
+                    backgroundColor: [
+                      'rgb(144,97,226)',
+                      'rgba(54, 162, 235, 1)'
+                    ],
+                  }]
+                },
+                options: {
+                  responsive: true,
+                },
+
+              });
+
+
+              var earning = document.getElementById('myChart4').getContext('2d');
+              var myChart = new Chart(earning, {
+                type: 'bar',
+                data: {
+                  labels: ['Placed', 'Shipped', 'Delivered', 'Cancelled',],
+                  datasets: [{
+                    label: 'Order Status',
+                    data: response.allOrderStatus,
+                    backgroundColor: [
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(60, 170, 70, 1)',
+                      'rgba(255, 0, 0, 1)',
+
+                    ],
+                  }]
+                },
+                options: {
+                  responsive: true,
+                }
+              });
+
+            }
+          })
+          console.log(totalAmount, 'toatalAmout');
+
+        }
+
+        forHome()
+
+
+
+      </script>
+      <%- include('../partials/admin-foot') %>

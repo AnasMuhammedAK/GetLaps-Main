@@ -1,0 +1,154 @@
+<%- include('../partials/admin-head') %>
+<%- include('../partials/admin-sidebar') %>
+<%- include('../partials/admin-navbar') %>
+<h6 class="mt-4 mb-3">Add Products</h6>
+<section class="col-xl-10">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="post" action="/admin/add-products" enctype="multipart/form-data">
+                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    <div class="row mb-4">
+                      <div class="col">
+                        <div class="form-outline">
+                          <select class="custom-select" name="category" id="inputGroupSelect01" required>
+                            <option selected value="">Choose Category</option>
+                            <% categories.forEach((x) => { %>
+                            <option><%=x.category %></option>
+                            <% }) %>
+                  
+                  
+                          </select>
+                          
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-outline">
+                          <select class="custom-select" name="brand" id="inputGroupSelect01" required>
+                            <option selected value="">Choose Brand</option>
+                            <% brands.forEach((x) => { %>
+                            <option><%=x.brand %></option>
+                            <% }) %>
+                  
+                  
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <!-- Text input -->
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form6Example3" class="form-control" name="title" required/>
+                      <label class="form-label" for="form6Example3">Title</label>
+                    </div>
+                  <!-- spects input -->
+                  <div class="row mb-4">
+                    <div class="col">
+                      <div class="form-outline">
+                        
+                        <div class="form-outline mb-4">
+                          <input type="text" id="form6Example6" class="form-control"  name="specs" required/>
+                          <label class="form-label" for="form6Example7">Processors</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <input type="number" id="form6Example6" class="form-control"  name="specs" required/>
+                          <label class="form-label" for="form6Example7">RAM</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <input type="number" id="form6Example6" class="form-control"  name="specs" required/>
+                          <label class="form-label" for="form6Example7">Storage</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <input type="number" id="form6Example6" class="form-control"  name="stock" required/>
+                          <label class="form-label" for="form6Example6">Stock</label>
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-outline">
+                        <div class="form-outline mb-4">
+                          <input type="text" id="form6Example6" class="form-control"  name="specs" required/>
+                          <label class="form-label" for="form6Example7">OS</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <input type="text" id="form6Example6" class="form-control"  name="specs" required/>
+                          <label class="form-label" for="form6Example7">Colour</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <input type="text" id="form6Example6" class="form-control"  name="specs" required/>
+                          <label class="form-label" for="form6Example7">Size</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <input type="number" id="form6Example5h" class="form-control" name="mrp" required/>
+                          <label class="form-label" for="form6Example5">MRP</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <input type="number" id="form6Example5" class="form-control"  name="price" required/>
+                          <label class="form-label" for="form6Example5" >Price</label>
+                        </div>
+                      
+                       
+                        
+                      </div>
+                    </div>
+                  </div>
+                  
+                 
+                    <!-- Text input -->
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form6Example4" class="form-control" name="description" required/>
+                      <label class="form-label" for="form6Example4">Description</label>
+                    </div>
+                  
+                    <!-- Email input -->
+                    
+                     
+
+                    <!-- Image Input -->
+                    
+                      <div class="row mb-4">
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="file" id="form6Example1" class="form-control" name="image1"required />
+                            <label class="form-label" for="form6Example1">Image 1 (Primary)</label>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="file" id="form6Example2" class="form-control"name="image2"required />
+                            <label class="form-label" for="form6Example2">Image 2</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-4">
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="file" id="form6Example1" class="form-control" name="image3"required />
+                            <label class="form-label" for="form6Example1">Image 3</label>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="file" id="form6Example2" class="form-control"name="image4" required/>
+                            <label class="form-label" for="form6Example2">Image 4</label>
+                          </div>
+                        </div>
+                      </div>
+                      
+                  
+                  
+                   
+                    
+                   
+                  
+                      
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4 float-end">Submit</button>
+                  </form>
+                  <a class="btn btn-primary" href="/admin/view-products">Cancel</a>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include('../partials/admin-foot') %>

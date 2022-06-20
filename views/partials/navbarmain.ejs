@@ -1,0 +1,137 @@
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+ <!-- Navbar-->
+ <style>
+     #proSearch{
+display: none;
+     }
+     #userProfile{
+         display: none;
+     }
+     @media only screen and (max-width: 767px) {
+    #proSearch{
+        display: block;
+    }
+}
+@media only screen and (max-width: 575px) {
+    #userProfile{
+        display: block;
+    }
+}
+
+ </style>
+<nav style="position: sticky;
+top: 0;
+z-index:9;" class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid justify-content-between">
+        <!-- Left elements -->
+        <div class="d-flex">
+            <!-- Brand -->
+            <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="/">
+                <img src="/images/GetLaps.jpg" height="50" alt="Logo" loading="lazy" style="margin-top: 2px;" />
+            </a>
+
+
+        </div>
+        <!-- Left elements -->
+
+        <!-- Center elements -->
+        <ul class="navbar-nav flex-row d-none d-md-flex">
+            <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="/shop">
+                <img src="/images/logo.png" height="50" alt="Logo" loading="lazy" style="margin-top: 2px;" />
+            </a>
+            <!-- Search form -->
+            <form class="input-group w-auto my-auto d-none d-sm-flex" method="post" action="/getSearchProducts" id="search-form">
+                <!-- <span class="input-group-text border-0 d-none d-lg-flex bg-light"><i class="fas fa-search "></i></span> -->
+                <input autocomplete="off" id="search-box" name="key" type="text" class="form-control" placeholder="Search"
+                    style="min-width: 125px;" />
+                   <button   style="border: none ;outline: none;background-color: black;color: white; width: 40px;" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                  </svg></button>
+                  
+
+            </form>
+            </li>
+        </ul>
+        <!-- Center elements -->
+
+        <!-- Right elements -->
+        <ul class="navbar-nav flex-row">
+            <li class="nav-item me-3 me-lg-1">
+                <a class="nav-link d-sm-flex align-items-sm-center" href="/profile">
+                    
+                        <i id="userProfile" class="fa-solid fa-user text-white"></i>
+
+                    <%if (userData.fullname !="" ){%>
+                        <strong class="d-none d-sm-block ms-1 text-white">
+                            <%=userData.fullname%>
+                        </strong>
+                        <%}%>
+
+
+                </a>
+            </li>
+
+            <li class="nav-item me-3 me-lg-1">
+                <a class="nav-link" href="/cart">
+                    
+                        <span><i class="fa-solid fa-cart-shopping text-white"></i></span>
+                        <%if(cartCount != '' ){%>
+                        <span id="cart-count" class="badge rounded-pill badge-notification bg-danger"><%=cartCount %></span>
+                        <%}else{%>
+                            <span id="cart-count" class="badge rounded-pill badge-notification bg-danger">0</span>
+                            <%}%>
+
+                </a>
+            </li>
+            <li  class="nav-item me-3 me-lg-1">
+                <a class="nav-link" href="/wishlist">
+
+                    <span><i class="fa-solid fa-heart text-white"></i></span>
+                    <%if(wishCount != '' ){%>
+                        <span id="wishlist-count" class="badge rounded-pill badge-notification bg-danger"><%=wishCount %></span>
+                        <%}else{%>
+                            <span id="wishlist-count" class="badge rounded-pill badge-notification bg-danger">0</span>
+                            <%}%>
+                </a>
+            </li>
+            
+            <li>
+                <section id="proSearch">
+                     <!-- Button trigger modal -->
+<button type="" style="border: none ;outline: none;background-color: #262626" class="text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    <i class="fas fa-search "></i>
+  </button>
+                </section>
+                </li>
+
+
+        </ul>
+        <!-- Right elements -->
+    </div>
+</nav>
+<!-- Navbar -->
+ <!-- Modal -->
+ <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Searach Your Products</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="input-group w-auto my-auto  d-sm-flex" method="post" action="/getSearchProducts" id="search-form">
+                <!-- <span class="input-group-text border-0 d-none d-lg-flex bg-light"><i class="fas fa-search "></i></span> -->
+                <input autocomplete="off" id="search-box" name="key" type="text" class="form-control" placeholder="Search"
+                    style="min-width: 125px;" />
+                   <button   style="border: none ;outline: none;background-color: black;color: white; width: 40px;" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                  </svg></button>
+                  
+
+            </form>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

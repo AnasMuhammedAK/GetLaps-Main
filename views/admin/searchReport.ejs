@@ -1,0 +1,460 @@
+<%- include('../partials/admin-head') %>
+  <%- include('../partials/admin-sidebar') %>
+    <%- include('../partials/admin-navbar') %>
+     
+      <div class="text-center mt-5" style="margin: auto;">
+        <form action="/admin/getChartDatas" id="" method="post">
+          <label for=""><strong>Sart Date</strong></label>
+          <input type="Date" name="startDate" id="">
+          <label for=""><strong>End Date</strong></label>
+          <input type="Date" name="endDate" id="">
+          <button class="btn btn-primary" type="submit">Get</button>
+        </form>
+      </div>
+      <div class="text-center mt-5" style="margin: auto;"><h3> Report <%=text%></h3> <hr>
+      </div>
+      <!-- Sale & Revenue Start -->
+      <div class="container-fluid pt-4 px-4">
+
+        <div class="row g-4">
+          <div class="col-sm-6 col-xl-3">
+            <div class="bg-white rounded d-flex align-items-center justify-content-between p-4 ">
+              <i class="fa fa-chart-line fa-3x text-primary"></i>
+              <div class="ms-3">
+                <p class="mb-2">Total Orders</p>
+                <h6 class="mb-0"><span id="totalOrders">0</span></h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="bg-white rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fa fa-chart-bar fa-3x text-primary"></i>
+              <div class="ms-3">
+                <p class="mb-2">Total Sale</p>
+                <h6 class="mb-0"><span id="totalSales">0</span></h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="bg-white rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fa fa-chart-area fa-3x text-primary"></i>
+              <div class="ms-3">
+                <p class="mb-2">Total Revenue</p>
+                <h6 class="mb-0"><span id="totalRevenue">0</span></h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="bg-white rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fa fa-chart-pie fa-3x text-primary"></i>
+              <div class="ms-3">
+                <p class="mb-2">Total Refund</p>
+                <h6 class="mb-0"><span id="totalRefund">0</span></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sale & Revenue End -->
+
+
+      <!-- Sales Chart Start -->
+      <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-light text-center rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Brand wise Sales</h6>
+                <a href=""></a>
+              </div>
+              <canvas id="myChart1"></canvas>
+            </div>
+          </div>
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-light text-center rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Payment Method</h6>
+                <a href=""></a>
+              </div>
+              <canvas id="myChart33"></canvas>
+            </div>
+          </div>
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-light text-center rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0"> Sales</h6>
+                <a href=""></a>
+              </div>
+              <canvas id="myChart2"></canvas>
+            </div>
+          </div>
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-light text-center rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">orders</h6>
+                <a href="/admin/view-orders">Show All</a>
+              </div>
+              <canvas id="myChart4"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sales Chart End -->
+
+
+      <!-- Recent Sales Start -->
+      <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Recent Salse</h6>
+            <a href="">Show All</a>
+          </div>
+          <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+              <thead>
+                <tr class="text-dark">
+                  <th scope="col"><input class="form-check-input" type="checkbox"></th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Invoice</th>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input class="form-check-input" type="checkbox"></td>
+                  <td>01 Jan 2045</td>
+                  <td>INV-0123</td>
+                  <td>Jhon Doe</td>
+                  <td>$123</td>
+                  <td>Paid</td>
+                  <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                </tr>
+                <tr>
+                  <td><input class="form-check-input" type="checkbox"></td>
+                  <td>01 Jan 2045</td>
+                  <td>INV-0123</td>
+                  <td>Jhon Doe</td>
+                  <td>$123</td>
+                  <td>Paid</td>
+                  <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                </tr>
+                <tr>
+                  <td><input class="form-check-input" type="checkbox"></td>
+                  <td>01 Jan 2045</td>
+                  <td>INV-0123</td>
+                  <td>Jhon Doe</td>
+                  <td>$123</td>
+                  <td>Paid</td>
+                  <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                </tr>
+                <tr>
+                  <td><input class="form-check-input" type="checkbox"></td>
+                  <td>01 Jan 2045</td>
+                  <td>INV-0123</td>
+                  <td>Jhon Doe</td>
+                  <td>$123</td>
+                  <td>Paid</td>
+                  <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                </tr>
+                <tr>
+                  <td><input class="form-check-input" type="checkbox"></td>
+                  <td>01 Jan 2045</td>
+                  <td>INV-0123</td>
+                  <td>Jhon Doe</td>
+                  <td>$123</td>
+                  <td>Paid</td>
+                  <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Recent Sales End -->
+
+
+      <!-- Widgets Start -->
+      <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+          <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="h-100 bg-light rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <h6 class="mb-0">Messages</h6>
+                <a href="">Show All</a>
+              </div>
+              <div class="d-flex align-items-center border-bottom py-3">
+                <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                <div class="w-100 ms-3">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-0">Jhon Doe</h6>
+                    <small>15 minutes ago</small>
+                  </div>
+                  <span>Short message goes here...</span>
+                </div>
+              </div>
+              <div class="d-flex align-items-center border-bottom py-3">
+                <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                <div class="w-100 ms-3">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-0">Jhon Doe</h6>
+                    <small>15 minutes ago</small>
+                  </div>
+                  <span>Short message goes here...</span>
+                </div>
+              </div>
+              <div class="d-flex align-items-center border-bottom py-3">
+                <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                <div class="w-100 ms-3">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-0">Jhon Doe</h6>
+                    <small>15 minutes ago</small>
+                  </div>
+                  <span>Short message goes here...</span>
+                </div>
+              </div>
+              <div class="d-flex align-items-center pt-3">
+                <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                <div class="w-100 ms-3">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-0">Jhon Doe</h6>
+                    <small>15 minutes ago</small>
+                  </div>
+                  <span>Short message goes here...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="h-100 bg-light rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Calender</h6>
+                <a href="">Show All</a>
+              </div>
+              <div id="calender"></div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-xl-4">
+            <div class="h-100 bg-light rounded p-4">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">To Do List</h6>
+                <a href="">Show All</a>
+              </div>
+              <div class="d-flex mb-2">
+                <input class="form-control bg-transparent" type="text" placeholder="Enter task">
+                <button type="button" class="btn btn-primary ms-2">Add</button>
+              </div>
+              <div class="d-flex align-items-center border-bottom py-2">
+                <input class="form-check-input m-0" type="checkbox">
+                <div class="w-100 ms-3">
+                  <div class="d-flex w-100 align-items-center justify-content-between">
+                    <span>Short task goes here...</span>
+                    <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex align-items-center border-bottom py-2">
+                <input class="form-check-input m-0" type="checkbox">
+                <div class="w-100 ms-3">
+                  <div class="d-flex w-100 align-items-center justify-content-between">
+                    <span>Short task goes here...</span>
+                    <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex align-items-center border-bottom py-2">
+                <input class="form-check-input m-0" type="checkbox" checked>
+                <div class="w-100 ms-3">
+                  <div class="d-flex w-100 align-items-center justify-content-between">
+                    <span><del>Short task goes here...</del></span>
+                    <button class="btn btn-sm text-primary"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex align-items-center border-bottom py-2">
+                <input class="form-check-input m-0" type="checkbox">
+                <div class="w-100 ms-3">
+                  <div class="d-flex w-100 align-items-center justify-content-between">
+                    <span>Short task goes here...</span>
+                    <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex align-items-center pt-2">
+                <input class="form-check-input m-0" type="checkbox">
+                <div class="w-100 ms-3">
+                  <div class="d-flex w-100 align-items-center justify-content-between">
+                    <span>Short task goes here...</span>
+                    <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Widgets End -->
+
+
+      <!-- Footer Start -->
+      <div class="container-fluid pt-4 px-4">
+        <div class="bg-light rounded-top p-4">
+          <div class="row">
+            <div class="col-12 col-sm-6 text-center text-sm-start">
+              &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+            </div>
+            <div class="col-12 col-sm-6 text-center text-sm-end">
+              <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+              Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+              </br>
+              Distributed By <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer End -->
+      </div>
+      <!-- Content End -->
+
+     <!-- Back to Top -->
+      <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+      </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+      <script>
+       
+        
+       
+         let dateArray = <%- JSON.stringify(dateArray)%>
+         let totalArray= <%- JSON.stringify(totalArray)%>
+         let brandArray= <%- JSON.stringify(brandArray)%>
+         let sumArray= <%- JSON.stringify(sumArray)%>
+         console.log(dateArray, "date")
+
+         var ctx = document.getElementById('myChart2').getContext('2d');
+          letchart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+              labels:[...dateArray],
+              datasets: [{
+                label: "<%=text%>",
+                backgroundColor: ['rgb(128,233,30)', 'rgb(55, 99, 132)','rgba(255, 206, 86, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(60, 170, 70, 1)',
+                  'rgba(255, 0, 0, 1)',],
+                borderColor: 'rgb(255, 99, 132)',
+                borderWidth: 1,
+                data: [...totalArray],
+              }]
+            },
+
+            // Configuration options go here
+            options: {
+              tooltips: {
+                mode: 'index'
+              },
+              title: {
+                display: true,
+                text: 'Earning in this Date'
+              },
+              legend: {
+                position: 'top'
+              }
+            }
+          });
+         
+          var ctx = document.getElementById('myChart1').getContext('2d');
+          var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'pie',
+
+            // The data for our dataset
+            data: {
+              labels:[...brandArray] ,
+              datasets: [{
+                label: "last week dataset",
+                backgroundColor: ['rgb(64,140,139)', 'rgb(97,207,209)'],
+                borderColor: 'rgb(255, 99, 132)',
+                borderWidth: 0,
+                data:[...sumArray],
+              }]
+            },
+
+            // Configuration options go here
+            options: {
+              tooltips: {
+                mode: 'index'
+              },
+              title: {
+                display: true,
+                text: 'Earning in this Week'
+              },
+              legend: {
+                position: 'top'
+              }
+            }
+          });
+
+
+
+          document.getElementById('totalOrders').innerHTML = "<%=orderCount%> "
+          document.getElementById('totalSales').innerHTML = "₹ " + "<%=Sales%> "
+          document.getElementById('totalRevenue').innerHTML = "₹ " + "<%=successPayment%> "
+          document.getElementById('totalRefund').innerHTML = "₹ " + "<%=refund%> "
+
+          var ctx = document.getElementById('myChart33').getContext('2d');
+          var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+              labels: ['COD', 'Razorpay'],
+              datasets: [{
+                label: 'Paymnet methods',
+                data: [<%=cod%> , <%=razorpay%> ],
+                backgroundColor: [
+                  'rgb(144,97,226)',
+                  'rgba(54, 162, 235, 1)'
+                ],
+              }]
+            },
+            options: {
+              responsive: true,
+            },
+
+          });
+
+
+          var earning = document.getElementById('myChart4').getContext('2d');
+          var myChart = new Chart(earning, {
+            type: 'bar',
+            data: {
+              labels: ['Placed', 'Shipped', 'Delivered', 'Cancelled',],
+              datasets: [{
+                label: 'Order Status',
+                data: [<%=allOrderStatus%> ],
+                backgroundColor: [
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(60, 170, 70, 1)',
+                  'rgba(255, 0, 0, 1)',
+
+                ],
+              }]
+            },
+            options: {
+              responsive: true,
+            }
+          });
+        
+
+ 
+
+
+      </script>
+      <%- include('../partials/admin-foot') %>

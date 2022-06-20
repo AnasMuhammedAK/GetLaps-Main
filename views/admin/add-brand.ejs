@@ -1,0 +1,37 @@
+<%- include('../partials/admin-head') %>
+<%- include('../partials/admin-sidebar') %>
+<%- include('../partials/admin-navbar') %>
+<h6 class="mt-4 mb-3">Add New Brand</h6>
+<section class="col-xl-10">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="post" action="/admin/add-brand" enctype="multipart/form-data">
+                   
+                    <!-- Text input -->
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form6Example3" class="form-control" name="brand" required/>
+                      <label class="form-label" for="form6Example3">Brand Name</label>
+                    </div>
+                  
+                     
+
+                    <!-- Image Input -->
+                    
+                      <div class="row mb-4">
+                        <div class="col">
+                          <div class="form-outline">
+                            <input type="file" id="form6Example1" class="form-control" name="logo"required />
+                            <label class="form-label" for="form6Example1">Brand Logo</label>
+                          </div>
+                        </div>
+                        
+                      </div>
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4 float-end">Submit</button>
+                  </form>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include('../partials/admin-foot') %>

@@ -1,0 +1,291 @@
+<div class="col-lg-3 col-md-3">
+    <div class="shop__sidebar">
+        <div class="sidebar__categories">
+            <div class="section-title">
+                <h4>Filter Product</h4>
+            </div>
+            <form action="" id="filter" method="post">
+                <div class="categories__accordion">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-heading active">
+                                <a data-toggle="collapse" class="ms-3"
+                                    data-target="#collapseOne">Categories</a>
+                            </div>
+                            <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                <div class="card-body">
+                                   
+                                    <% categories.forEach((x)=> { %>
+                                    <ul>
+                                        <li>
+                                            <!-- <a href="/productCategory/<%=x.category%>"><%=x.category%></a> -->
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="checkbox"  class="custom-control-input" value="<%=x.category%>"
+                                                    name="category">
+                                                    
+                                                <div class="custom-control-label"><%=x.category%>
+                                                    
+                                                </div>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <%})%>
+                                    <input type="checkbox"  class="custom-control-input" value=""
+                                                    name="category" hidden checked>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card ">
+                            <div class="card-heading mb-3">
+                                <a data-toggle="collapse" class="ms-3"
+                                    data-target="#collapseTwo">Brands</a>
+                            </div>
+                            <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
+                                <div class="card-body">
+                                   
+                                    <% brands.forEach((x)=> { %>
+                                    <ul>
+                                        <li>
+                                            <!-- <a href="/productBrand/<%=x.brand%>"><%=x.brand%></a> -->
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="checkbox"  class="custom-control-input" value="<%=x.brand%>"
+                                                    name="brand">
+                                                <div class="custom-control-label"><%=x.brand%>
+                                                    
+                                                </div>
+                                            </label>
+                                        </li>
+                                       
+                                       
+                                    </ul>
+                                    <%})%>
+                                    <input type="checkbox"  class="custom-control-input" value=""
+                                    name="brand" hidden checked>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card ">
+                            <div class="card-heading mb-3">
+                                <a data-toggle="collapse" class="ms-3"
+                                    data-target="#collapseThree">Price Filter</a>
+                            </div>
+                            <div id="collapseThree" class="collapse" data-parent="#accordionExample">
+                                <div class="card-body">
+                                   
+                                    
+                                    <ul>
+                                        <li>
+                                            
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="radio"  class="custom-control-input" value="30000"
+                                                    name="price">
+                                                <div class="custom-control-label">Under 30,000
+                                                    
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="radio"  class="custom-control-input" value="40000"
+                                                    name="price">
+                                                <div class="custom-control-label">Under 40,000
+                                                    
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="radio"  class="custom-control-input" value="50000"
+                                                    name="price">
+                                                <div class="custom-control-label">Under 50,000
+                                                    
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="radio"  class="custom-control-input" value="60000"
+                                                    name="price">
+                                                <div class="custom-control-label">Under 60,000
+                                                    
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="radio"  class="custom-control-input" value="70000"
+                                                    name="price">
+                                                <div class="custom-control-label">Under 70,000
+                                                    
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="radio"  class="custom-control-input" value="80000"
+                                                    name="price">
+                                                <div class="custom-control-label">Under 80,000
+                                                    
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="radio"  class="custom-control-input" value="90000"
+                                                    name="price">
+                                                <div class="custom-control-label">Under 90,000
+                                                    
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="radio"  class="custom-control-input" value="120000"
+                                                    name="price">
+                                                <div class="custom-control-label">Under 1,20,000
+                                                    
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="radio"  class="custom-control-input" value="140000"
+                                                    name="price">
+                                                <div class="custom-control-label">Under 1,40,000
+                                                    
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="custom-control custom-checkbox">
+                                                <input type="radio"  class="custom-control-input" value="160000"
+                                                    name="price">
+                                                <div class="custom-control-label">Under 1,60,000
+                                                    
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <input type="radio"  class="custom-control-input" value="400000"
+                                                    name="price" hidden checked>
+                                       
+                                       
+                                    </ul>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </form>
+           
+        </div>
+        <!-- <div class="sidebar__filter">
+            <div class="section-title">
+                <h4>Sort by price</h4>
+            </div>
+            
+            <div class="border">
+                <select class="form-control" style="width: 10 rem;" name="sort" id="sortMenu">
+                <option value="sort">Default</option>
+                <option value="lh"><strong>Price : Low to High</strong></option>
+                <option value="hl"><strong>Price : High to Low</strong></option>
+            </select>
+            </div>
+        </div> -->
+        <!-- <div class="sidebar__sizes">
+            <div class="section-title">
+                <h4>Shop by size</h4>
+            </div>
+            <div class="size__list">
+                <label for="xxs">
+                    xxs
+                    <input type="checkbox" id="xxs">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="xs">
+                    xs
+                    <input type="checkbox" id="xs">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="xss">
+                    xs-s
+                    <input type="checkbox" id="xss">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="s">
+                    s
+                    <input type="checkbox" id="s">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="m">
+                    m
+                    <input type="checkbox" id="m">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="ml">
+                    m-l
+                    <input type="checkbox" id="ml">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="l">
+                    l
+                    <input type="checkbox" id="l">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="xl">
+                    xl
+                    <input type="checkbox" id="xl">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+        <div class="sidebar__color">
+            <div class="section-title">
+                <h4>Shop by size</h4>
+            </div>
+            <div class="size__list color__list">
+                <label for="black">
+                    Blacks
+                    <input type="checkbox" id="black">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="whites">
+                    Whites
+                    <input type="checkbox" id="whites">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="reds">
+                    Reds
+                    <input type="checkbox" id="reds">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="greys">
+                    Greys
+                    <input type="checkbox" id="greys">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="blues">
+                    Blues
+                    <input type="checkbox" id="blues">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="beige">
+                    Beige Tones
+                    <input type="checkbox" id="beige">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="greens">
+                    Greens
+                    <input type="checkbox" id="greens">
+                    <span class="checkmark"></span>
+                </label>
+                <label for="yellows">
+                    Yellows
+                    <input type="checkbox" id="yellows">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>  -->
+    </div>
+</div>

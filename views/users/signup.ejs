@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GetLaps</title>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
+
+  <section>
+</head>
+
+<body>
+
+  <%- include('../partials/navbar') %>
+    <style>
+      .error {
+        color: red;
+        opacity: .5;
+      }
+
+      #error {
+        color: red;
+        opacity: .5;
+
+
+      }
+    </style>
+
+    <section class="vh-100" style="background-color: #DEDEDE;">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadtext-centerow-2-strong" style="border-radius: 1rem;">
+              <div class="card-body p-5 text-center">
+
+                <h3 class="mb-5">Signup</h3>
+                <form action="/register" method="post" id="formvdn" onsubmit="return validation()">
+                  <div class="error"></div>
+
+
+                  <label class="form-label mb-3 error">
+                    <%=error%>
+                  </label>
+
+                  <div class="form-outline mb-4">
+                    <input type="text" id="typeEmailX-21" class="form-control form-control-lg" name="fullname" />
+                    <label class="form-label" for="typeEmailX-2">Full Name</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="email" id="typeEmailX-2" class="form-control form-control-lg" name="email" />
+                    <label class="form-label" for="typeEmailX-2">Email</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="number" id="typeEmailX-211" class="form-control form-control-lg" name="mobile" />
+                    <label class="form-label" for="typeEmailX-2">Mobile</label>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="password" id="psw" class="form-control form-control-lg" name="password" />
+                    <label class="form-label" for="typePasswordX-2">Password</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="password" id="cpsw" class="form-control form-control-lg" name="repassword" />
+                    <label class="form-label" for="typePasswordX-2">Confirm Password</label>
+                  </div>
+
+                  <div style="margin-top: 7px;" id="CheckPasswordMatch"></div>
+                  <br>
+
+
+                  <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
+                  <p class="small fw-bold mt-2 pt-1 mb-0">Have an account? <a href="/login"
+                      class="link-danger">Login</a></p>
+
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+
+      $(function () {
+
+
+        $("#formvdn").validate({
+          rules: { // to define rules
+            fullname: {
+              required: true,
+              minlength: 4,
+              maxlength: 15,
+              namevalidation: true
+            },
+            password: {
+              required: true,
+              minlength: 3
+
+            },
+            email: { 
+              required: true,
+               email: true },
+            mobile: {
+              required: true,
+              maxlength: 10,
+              minlength: 10
+            },
+            repassword: {
+              required: true,
+              equalTo: "#psw"
+            }
+
+          },
+          messages: { // to define custom messages
+            fullname: {
+              required: "Please enter your name",
+              minlength: "At least 4 characters required",
+              maxlength: "Maximum 15 characters are allowed"
+            },
+            password: {
+              required: "Enter Your Password",
+              minlength: "Enter Atleast 3 Characters"
+            },
+            email: {
+              required: "Enter Your Valid Email",
+              email: "The email should be in the format: abc@domain.tld"
+
+            },
+
+            mobile: {
+              required: "Enter Your Mobile Number",
+              maxlength: "Maximum 10 Character Allowed",
+              minlength: "Enter Atleat 10 Character"
+            },
+            repassword: "Again Enter Your Correct Password"
+          },
+
+          submitHandler: function (form) {
+            if ($(form).valid())
+              form.submit();
+            return false; // prevent normal form posting
+          }
+
+        })
+        $.validator.addMethod("namevalidation", function (value, element) {
+          return /^[A-Za-z]+$/.test(value);
+        },
+          "Sorry..! Only alphabets are allowed"
+        );
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $("#cpsw").on('keyup', function () {
+          var password = $("#psw").val();
+          var confirmPassword = $("#cpsw").val();
+          if (password != confirmPassword)
+            $("#CheckPasswordMatch").html("Password does not match !").css("color", "red");
+          else
+            $("#CheckPasswordMatch").html("Password match !").css("color", "green");
+        });
+      });
+
+
+
+    </script>
+
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
+</body>
+
+</html>
+<!-- <script>
+  $(document).ready(function(){
+$("#signup-form").validate({
+  errorClass:"err",
+rules:{
+  name:{
+      required:true,
+      minlength:4,
+      maxlength:15,
+      namevalidation:true
+  },
+  
+   mobile:{
+      required:true,
+      minlength:10,
+      maxlength:15
+  },
+  email:{
+      required:true,
+      email:true
+  },
+
+  password:{
+      required:true,
+      minlength:5,
+      strongePassword:true
+     
+  },
+  repassword:{
+      required:true,
+      equalTo:"#password"
+  }
+},
+messages:{
+   name:{
+       required:"Please enter your name",
+       minlength:"At least 4 characters required",
+       maxlength:"Maximum 15 characters are allowed"
+   },
+   
+   mobile:{
+      required:"Please enter your phone number",
+      minlength:"Enter 10 numbers",
+      maxlength:"Number should be less than or equal to 15 numbers"
+     },
+   email:{
+       required:"Please enter your email id",
+       email:"Enter a valid email"
+   },
+  //  password:"Please enter your password",
+   repassword:{
+       required:"confirm password",
+       equalTo:"Password doesn't matches"
+   }
+}
+})
+$.validator.addMethod("namevalidation", function(value, element) {
+      return /^[A-Za-z]+$/.test(value);
+},
+"Sorry,only alphabets are allowed"
+);
+$.validator.addMethod("strongePassword", function(value,element) {
+return /^[A-Za-z0-9\d=!\-@._]$/.test(value) && /[a-z]/.test(value) && /\d/.test(value) && /[A-Z]/.test(value);
+},
+"The password must contain at least 1 number,1 lower case letter, and 1 upper case letter"
+); 
+
+})
+
+
+</script> -->

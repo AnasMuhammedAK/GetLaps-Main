@@ -1,0 +1,183 @@
+
+<style>
+    body{
+    background: #f7f7ff;
+    margin-top:20px;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: .25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+}
+.me-2 {
+    margin-right: .5rem!important;
+}
+</style>
+<div style="margin-top: 150px;" class="container ">
+  <%if( alert !="" ){%>
+    <div id="success-alert" class="alert alert-success alert-dismissible fade show m-4" role="alert">
+      <strong>SUCCESS!..</strong>
+      <%=alert%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <%}%>
+    <div class="main-body">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                          <% if(proPic!=""){%>
+                            <img src="/uploads/<%=proPic%>" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                            
+                            <%}else{%>
+                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                            <%}%>
+                            <div class="dropdown">
+                                <!-- ------------------ -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-link text-dark" data-toggle="modal" data-target="#exampleModal">
+    Change
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change Your Profile Picture</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/changeProPic" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <input type="file" name="propic" required>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit"  class="btn btn-primary upload-button">Upload</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+                                 <!-- ------------------ -->
+                              </div>
+                            <div class="mt-3">
+                                <h4><%=userData.fullname%></h4>
+                                
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <ul class="list-group list-group-flush ">
+                            <li class=" list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <a href="/orders"><h6 class="mb-0 mt-0  text-dark text-center"><img style="height: 30px;width: 30px;" src="https://cdn-icons-png.flaticon.com/512/1007/1007959.png" alt="">  <span class="ms-3">My Orders</span></h6></a>
+                                
+                            </li>
+                            
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                               <a href="/wishlist"> <h6 class="mb-0 text-dark"><img style="height: 27px;width: 27px;" src="https://cdn-icons-png.flaticon.com/512/535/535234.png" alt=""> <span class="ms-3">My Wishlist</span></h6></a>
+                                
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                              <a href="/cart"><h6 class="mb-0 text-dark"><img style="height: 30px;width: 30px;" src="https://cdn-icons.flaticon.com/png/512/2838/premium/2838838.png?token=exp=1655559226~hmac=43ba0f9d2ed76e7cdf21c1c2b6896425" alt="">  <span class="ms-3">My Cart</span></h6></a>
+                              
+                          </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0 text-dark"><img style="height: 30px;width: 30px;" src="https://cdn-icons-png.flaticon.com/512/2522/2522138.png" alt="">  <span class="ms-3">Edit Profile</span></h6>
+                                
+                            </li>
+                            
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                
+                                <div class="text-center">
+                                  <a href="" class="" data-toggle="modal" data-target="#modalRegisterForm">
+                                    <h6 class="mb-0 text-dark"><img style="height: 30px;width: 30px;"  src="https://cdn-icons-png.flaticon.com/512/3064/3064155.png" alt=""> <span class="ms-3">Change Password</span></h6></a>
+                                </div>
+                            </li>
+                            
+                            <li class=" list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                               <a href="/address"> <h6 class="mb-5 text-dark "><img style="height: 30px;width: 30px;"  src="https://cdn-icons.flaticon.com/png/512/5450/premium/5450743.png?token=exp=1655558592~hmac=618f5fcfca7ec5739126f0fe3bcc6d6e" alt="">  <span class="ms-3">Address</span></h6></a>
+                                
+                            </li>
+                            <hr>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <a href="/logout"><h6 class="mb-0 text-dark"><img style="height: 30px;width: 30px;" src="https://cdn-icons.flaticon.com/png/512/4034/premium/4034329.png?token=exp=1655558630~hmac=d86f7b77a96aa16dcb71bbb3ef53de4a" alt="">  <span class="ms-3">Logout</span></h6></a>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold">Change Your Password</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body mx-3 bg-light">
+                  <form action="/changePassword" method="post">
+                    <div class="md-form mb-5">
+                      <i class="fas fa-lock prefix grey-text"></i>
+                      <input type="password" id="orangeForm-name" class="form-control validate" name="currpass"required  placeholder="Enter current password">
+                      <label data-error="wrong" data-success="right" for="orangeForm-name">Current Password</label>
+                    </div>
+                    <div class="md-form mb-5">
+                      <i class="fas fa-lock prefix grey-text"></i>
+                      <input id="psw"  type="password" class="form-control validate" name="newpass" required placeholder="Enter New Password">
+                      <label data-error="wrong" data-success="right" for="orangeForm-email">New Password</label>
+                    </div>
+            
+                    <div class="md-form mb-4">
+                      <i class="fas fa-lock prefix grey-text"></i>
+                      <input  type="password" id="cpsw" class="form-control validate" required placeholder="Confirm Your New Password">
+                      <label data-error="wrong" data-success="right" for="orangeForm-pass">Confirm New Password</label>
+                      <div style="margin-top: 7px;" id="CheckPasswordMatch"></div>
+                    </div>
+            
+                  </div>
+                  <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit" class="btn btn-deep-orange">Update</button>
+                  </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+          
+          
+            <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+            <script>
+             $("#success-alert").fadeTo(2000, 500).slideUp(10, function(){
+             $("#success-alert").slideUp(10);
+           });
+           
+           </script>  
+            <script>
+              $(document).ready(function () {
+                $("#cpsw").on('keyup', function () {
+                  var password = $("#psw").val();
+                  var confirmPassword = $("#cpsw").val();
+                  if (password != confirmPassword)
+                    $("#CheckPasswordMatch").html("Password does not match !").css("color", "red");
+                  else
+                    $("#CheckPasswordMatch").html("Password match !").css("color", "green");
+                });
+              });
+        
+        
+        
+            </script>    

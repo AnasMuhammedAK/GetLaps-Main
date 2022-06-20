@@ -1,0 +1,689 @@
+<%- include('../partials/head') %>
+	<%- include('../partials/navbarmain') %>
+
+		<!-- ajax for immediate response for form submission -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+		<div class="colorlib-loader"></div>
+
+		<div id="page">
+
+			<div class="breadcrumbs">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<p class="bread"><span><a href="/">Home</a></span> / <span><a href="/cart">Cart</a></span> /
+								<span>Checkout</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="colorlib-product">
+				<div class="container">
+					<div class="container mt-5 ">
+						<div class="row ">
+						  <div style="margin: auto;border-radius: 20px;" class="col-12 col-md-10 hh-grayBox pt45 pb20 text-center">
+							<div class="row justify-content-between">
+							  <div class="order-tracking">
+								<span class="is-complete"></span>
+								<p>Shopping Cart<br><span></span></p>
+							  </div>
+							  <div class="order-tracking">
+								<span class="is-complete"></span>
+								<p>Checkout<br><span></span></p>
+							  </div>
+							  <div class="order-tracking">
+								<span class="is-complete"></span>
+								<p>Order Complete<br><span></span></p>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="row">
+								<%if(address !="" ){%>
+									<% address.forEach((x)=> { %>
+
+										<div class="col-md-6">
+											<div class="col mb-3  ">
+												<div class="card border">
+													<div class="card-body">
+														<h5 class="card-title" style="font-weight: 700;">
+															<%=x.fname%>
+																<%=x.lname%>
+														</h5>
+														<p class="card-text" style="font-weight: 700;">
+															<%=x.house%> , <%=x.localplace%> - <%=x.pin%> <br>
+																		<%=x.towncity%> , <%=x.district%> , <%=x.state%>
+																					<br>
+																					<%=x.email%> , <%=x.mobile%><br>
+														</p>
+														<button class="btn btn-success float-end"
+															style="font-weight: 700;"
+															onclick="autoFill('<%=x.fname%>','<%=x.lname%>','<%=x.house%>','<%=x.localplace%> ','<%=x.towncity%>','<%=x.district%>','<%=x.state%>','<%=x.pin%>','<%=x.email%>','<%=x.mobile%>')">Auto
+															Fill</button>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<% }) %>
+											<%}else{%>
+												<a href="/add-address" style="width: 25%;margin: auto;"
+													class="btn btn-success px-4 mb-3 mt-3">Add New Address</a>
+												<%}%>
+													<hr>
+													<div>
+														<h5 class="text-center">OR-Enter New Address</h5>
+													</div>
+													<hr>
+							</div>
+							<form method="post" class="colorlib-form" id="checkout-form" autocomplete="on">
+								<h2>Delivery Address</h2>
+								<div class="row">
+
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="fname">First Name</label>
+											<input type="text" id="fname" name="fname" class="form-control"
+												placeholder="Your firstname" required>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="lname">Last Name</label>
+											<input type="text" id="lname" name="lname" class="form-control"
+												placeholder="Your lastname" required>
+										</div>
+									</div>
+
+
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="fname">House Name</label>
+											<input type="text" id="house" name="house" class="form-control"
+												placeholder="Enter Your House Name" required>
+										</div>
+
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="companyname">Local Place</label>
+											<input type="text" id="localplace" name="localplace" class="form-control"
+												placeholder="Town or City" required>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="companyname">Town/City</label>
+											<input type="text" id="towncity" name="towncity" class="form-control"
+												placeholder="Town or City" required>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="companyname">District</label>
+											<input type="text" id="district" name="district" class="form-control"
+												placeholder="Town or City" required>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="stateprovince">State</label>
+											<input type="text" id="state" name="state" class="form-control"
+												placeholder="State " required>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="lname">PIN Code</label>
+											<input type="number" id="pin" name="pin" class="form-control"
+												placeholder="PIN Code" required>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="email">E-mail Address</label>
+											<input type="email" id="email" name="email" class="form-control"
+												placeholder="Email" required>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="Phone">Mobile Number</label>
+											<input type="number" id="mobile" name="mobile" class="form-control"
+												placeholder="Mobile" required>
+										</div>
+									</div>
+
+
+								</div>
+								<hr>
+								<div class="row">
+
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="cart-detail border">
+											<h4>Cart Total</h4>
+											<hr>
+											<ul>
+												<li>
+													<strong><span>Subtotal</span> <span>
+															<%=total%>
+														</span></strong>
+													<ul>
+														<% products.forEach((x)=> { %>
+															<li><span>
+																	<%=x.quantity%> x <%=x.product.title%>
+																</span> <span>
+																	<%=x.product.price*x.quantity%>
+																</span></li>
+															<!-- <li><span>1 x Product Name</span> <span>RS.0.00</span></li> -->
+															<% }) %>
+													</ul>
+												</li>
+												<li><span>Shipping</span> <span>0.00</span></li>
+												<li><span style="display: none;" id="discountLabel">Coupon
+														discount</span><span id="discountspan"
+														style="display: none;">0</span></li>
+												<li><strong><span>Order Total</span> <span id="totalOriginal">
+															<%=total%>
+														</span></strong></li>
+												<input type="text" name="discount" style="display: none;" id="discount"
+													hidden>
+											</ul>
+											<!-- Coupon starting  -->
+											<div class="your-order-bottom">
+												<div class="discount-code">
+													<!-- Button trigger modal -->
+													<button type="button" class="btn btn-link float-end"
+														data-toggle="modal" data-target="#exampleModalCenter">
+														Get New Coupon
+													</button>
+													<p>Enter your coupon code if you have one.</p>
+
+													<input type="text" class="form-control" name="coupon"
+														id="couponInput" autocapitalize="on" />
+													<input type="text" id="couponTotal" name="total" value="<%=total%>"
+														hidden>
+													<input type="text" id="code" name="Coupon_code" hidden>
+													<a id="couponBtn" onclick="couponApply()"
+														class="btn bg-success text-white text-center  mt-2"
+														style="width: 100%;text-decoration: none;">Apply
+														Coupon</a>
+													<!-- Error handling of coupons  -->
+													<div class="mt-2">
+														<div class="alert alert-danger" style="display: none;"
+															id="couponUsed" role="alert">
+															This Coupon was redeemed
+														</div>
+														<div class="alert alert-danger" style="display: none;"
+															id="couponInvalid" role="alert">
+															This Coupon is
+															invalid
+														</div>
+														<div class="alert alert-success" style="display: none;"
+															id="couponSuccess" role="alert">
+															Coupon Applied
+															Successfully
+														</div>
+														<div class="alert alert-warning" style="display: none;"
+															id="couponExpired" role="alert">
+															Sorry!!! Your
+															Coupon has been Expired
+														</div>
+
+														<div class="alert alert-warning" style="display: none;"
+															id="couponMaxLimit" role="alert">
+															Sorry!!! Your
+															Coupon Has Reached Maximum Limit
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+
+
+									<!-- Modal -->
+
+									<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+										aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+
+												<div class="modal-header">
+													<h3 class="modal-title" id="exampleModalLongTitle">All Available
+														Coupons</h3>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+
+												</div>
+												<% coupons.forEach((x)=> { %>
+													<div class="modal-body">
+														<div class="row ">
+															<div class="col-12 ">
+																<input type="text" name="" id="<%=x._id%>"
+																	value="<%=x.coupon %>" hidden>
+
+																<div class="card">
+																	<div class="card-body">
+																		<h1 class="card-title">
+																			<%=x.coupon %>
+																		</h1>
+																		<p class="card-text">You Can get <strong>
+																				<%=x.offer %>%
+																			</strong> Discount for this Coupon</p>
+																		<p>Expired on : <%=x.expiry %>
+																		</p>
+																		<button type="button"
+																			onclick="copyFunction('<%=x._id%>')"
+																			class="btn btn-primary copy-button">Copy</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<%})%>
+														<div class="modal-footer"></div>
+
+											</div>
+										</div>
+									</div>
+
+									<!-- Modal end -->
+
+									<div class="col-lg-6">
+										<div class="cart-detail border">
+											<h4>Payment Method</h4>
+											<hr>
+											<div class="form-group">
+												<div class="col-md-12">
+													<div class="radio">
+														<label><input type="radio" name="paymentMethod" value="cod"
+																required>
+															COD</label>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-md-12">
+													<div class="radio">
+														<label><input type="radio" name="paymentMethod"
+																value="razorpay"> Razorpay</label>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-md-12">
+													<div class="radio">
+														<label><input type="radio" name="paymenMethod" value="paypal">
+															Paypal</label>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<input type="text" name="userId" value="<%=userData._id%>" hidden>
+								<hr>
+
+								<div class="row">
+									<div class="col-md-12 text-center">
+										<button class="btn btn-success" type="submit">CHECHOUT</button>
+									</div>
+								</div>
+							</form>
+						</div>
+
+						<div class="col-lg-4">
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Footer Section Begin -->
+			<%- include('../partials/userfooter') %>
+				<!-- Footer Section End -->
+		</div>
+
+		<div class="gototop js-top">
+			<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+		</div>
+		<!--Sweet Alert CDN-->
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script>
+
+			function autoFill(fname, lname, house, localplace, towncity, district, state, pin, email, mobile) {
+
+				document.getElementById('fname').value = fname
+				document.getElementById('lname').value = lname
+				document.getElementById('house').value = house
+				document.getElementById('localplace').value = localplace
+				document.getElementById('towncity').value = towncity
+				document.getElementById('district').value = district
+				document.getElementById('state').value = state
+				document.getElementById('pin').value = pin
+				document.getElementById('email').value = email
+				document.getElementById('mobile').value = mobile
+
+			}
+		</script>
+
+		<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+		<script>
+			$("#checkout-form").submit((e) => {
+				e.preventDefault()
+				$.ajax({
+					url: '/placeOrder',
+					method: 'post',
+					data: $('#checkout-form').serialize(),
+					success: (Response) => {
+						if (!Response.stockout) {
+							if (Response.codSuccess) {
+								location.href = '/order-compleated'
+							} else {
+								razorpayPayment(Response)
+							}
+						} else {
+							Swal.fire(
+								'Out of stock..!',
+								'Your cart has a stockout product',
+								'error'
+							)
+						}
+					}
+
+				})
+			})
+			function razorpayPayment(order) {
+				var options = {
+					"key": "rzp_test_DLe9uyAPiBCjNy", // Enter the Key ID generated from the Dashboard
+					"amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+					"currency": "INR",
+					"name": "GetLaps",
+					"description": "Test Transaction",
+					"image": "https://example.com/your_logo",
+					"order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+					"handler": function (response) {
+						// alert(response.razorpay_payment_id);
+						// alert(response.razorpay_order_id);
+						// alert(response.razorpay_signature)
+						
+						verifyPeyment(response, order)
+					},
+					"prefill": {
+						"name": "Gaurav Kumar",
+						"email": "gaurav.kumar@example.com",
+						"contact": "9999999999"
+					},
+					"notes": {
+						"address": "Razorpay Corporate Office"
+					},
+					"theme": {
+						"color": "#3399cc"
+					}
+				};
+				var rzp1 = new Razorpay(options)
+				rzp1.open()
+			}
+			function verifyPeyment(payment, order) {
+				
+				$.ajax({
+					url: '/verify-payment',
+					data: {
+						payment,
+						order
+					},
+					method: 'post',
+					success: (response) => {
+						if (response.status) {
+							location.href = '/order-compleated'
+						} else {
+							alert(response.msg)
+						}
+					}
+				})
+			}
+		</script>
+		<script>
+			function couponApply() {
+				let couponCode = document.getElementById('couponInput').value
+				let couponTotal = document.getElementById('couponTotal').value
+
+				$.ajax({
+					url: '/couponApply',
+					data: {
+						coupon: couponCode,
+						total: couponTotal
+					},
+					method: 'post',
+					success: (response) => {
+						console.log(response)
+						if (response.couponSuccess) {
+							let oldTotal = parseInt(document.getElementById('totalOriginal').innerHTML)
+							let discount = oldTotal - parseInt(response.total)
+							document.getElementById('couponInput').readOnly = true
+							document.getElementById('discount').value = discount
+							document.getElementById('code').value = couponCode
+							alert(oldTotal, discount)
+							$("#discountspan").html(parseInt(discount))
+							$('#discountspan').show()
+							$('#discountLabel').show()
+							$('#discounttd').show()
+							$('#newTotal').show()
+							$('#tdTotal').show()
+							$('#totalOriginal').show()
+
+							document.getElementById('totalOriginal').innerHTML = response.total
+							$('#couponSuccess').show()
+							$('#couponUsed').hide()
+							$('#couponInvalid').hide()
+							$('#couponExpired').hide()
+							$('#couponMaxLimit').hide()
+						}
+
+						if (response.couponUsed) {
+							$('#couponUsed').show()
+							$('#couponSuccess').hide()
+							$('#couponInvalid').hide()
+							$('#couponExpired').hide()
+							$('#discountspan').hide()
+							$('#discountLabel').hide()
+							$('#couponMaxLimit').hide()
+						}
+						if (response.invalidCoupon) {
+							$('#couponInvalid').show()
+							$('#couponSuccess').hide()
+							$('#couponUsed').hide()
+							$('#couponExpired').hide()
+							$('#discountspan').hide()
+							$('#discountLabel').hide()
+							$('#couponMaxLimit').hide()
+						}
+						if (response.couponExpired) {
+							$('#couponExpired').show()
+							$('#couponSuccess').hide()
+							$('#couponInvalid').hide()
+							$('#couponUsed').hide()
+							$('#discountspan').hide()
+							$('#discountLabel').hide()
+							$('#couponMaxLimit').hide()
+						}
+						if (response.couponMaxLimit) {
+							$('#couponMaxLimit').show()
+							$('#couponExpired').hide()
+							$('#couponSuccess').hide()
+							$('#couponInvalid').hide()
+							$('#couponUsed').hide()
+							$('#discountspan').hide()
+							$('#discountLabel').hide()
+						}
+					}
+				})
+			}
+		</script>
+
+		<script>
+
+			function copyFunction(couponId) {
+
+				var copyText = document.getElementById(couponId);
+				copyText.select();
+				copyText.setSelectionRange(0, 99999);
+				navigator.clipboard.writeText(copyText.value);
+				//  popup
+				$(".copy-button").on("click", function (e) {
+					e.preventDefault();
+					var self = $(this);
+					console.log(self.data("title"));
+					Swal.fire({
+						position: 'top-center',
+						icon: 'success',
+						title: 'Coupon Copied ' + "'" + copyText.value + "'",
+						showConfirmButton: false,
+						timer: 2000
+					})
+				})
+			}
+		</script>
+			 <style>
+				
+		
+				.hh-grayBox {
+				 
+				  margin-bottom: 20px;
+				  padding: 35px;
+				  margin-top: 20px;
+				}
+		
+				.pt45 {
+				  padding-top: 45px;
+				}
+		
+				.order-tracking {
+				  text-align: center;
+				  width: 33.33%;
+				  position: relative;
+				  display: block;
+				}
+		
+				.order-tracking .is-complete {
+				  display: block;
+				  position: relative;
+				  border-radius: 50%;
+				  height: 30px;
+				  width: 30px;
+				  border: 0px solid #AFAFAF;
+				  background-color: #f7be16;
+				  margin: 0 auto;
+				  transition: background 0.25s linear;
+				  -webkit-transition: background 0.25s linear;
+				  z-index: 2;
+				}
+		
+				.order-tracking .is-complete:after {
+				  display: block;
+				  position: absolute;
+				  content: '';
+				  height: 14px;
+				  width: 7px;
+				  top: -2px;
+				  bottom: 0;
+				  left: 5px;
+				  margin: auto 0;
+				  border: 0px solid #AFAFAF;
+				  border-width: 0px 2px 2px 0;
+				  transform: rotate(45deg);
+				  opacity: 0;
+				}
+		
+				.order-tracking.completed .is-complete {
+				  border-color: #27aa80;
+				  border-width: 0px;
+				  background-color: #27aa80;
+				}
+		
+				.order-tracking.completed .is-complete:after {
+				  border-color: #fff;
+				  border-width: 0px 3px 3px 0;
+				  width: 7px;
+				  left: 11px;
+				  opacity: 1;
+				}
+		
+				.order-tracking p {
+				  color: #A4A4A4;
+				  font-size: 16px;
+				  margin-top: 8px;
+				  margin-bottom: 0;
+				  line-height: 20px;
+				}
+		
+				.order-tracking p span {
+				  font-size: 14px;
+				}
+		
+				.order-tracking.completed p {
+				  color: #000;
+				}
+		
+				.order-tracking::before {
+				  content: '';
+				  display: block;
+				  height: 3px;
+				  width: calc(100% - 40px);
+				  background-color: #f7be16;
+				  top: 13px;
+				  position: absolute;
+				  left: calc(-50% + 20px);
+				  z-index: 0;
+				}
+		
+				.order-tracking:first-child:before {
+				  display: none;
+				}
+		
+				.order-tracking.completed:before {
+				  background-color: #27aa80;
+				}
+			  </style>
+		
+			  
+		
+			  <script>
+				var foo = "checkout";
+				var div = document.getElementsByClassName("order-tracking")
+				if (foo == "cart") {
+				  div[0].classList.add('completed')
+				} else if (foo == "checkout") {
+				  div[0].classList.add('completed')
+				  div[1].classList.add('completed')
+				} else if (foo == "Delivered") {
+				  div[0].classList.add('completed')
+				  div[1].classList.add('completed')
+				  div[2].classList.add('completed')
+				}
+			  </script>
+
+		<%- include('../partials/foot') %>
