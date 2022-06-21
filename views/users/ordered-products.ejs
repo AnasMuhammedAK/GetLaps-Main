@@ -108,19 +108,20 @@
                                   <p class="text-muted mb-0"> Date - <%=order.date%> <br>Time - <%=order.time%>
                                   </p>
                                   <p class="text-muted mb-0"> </p>
-                                  <!-- <p class="text-muted mb-0"><span class="fw-bold me-4">GST 8%</span> {{GST}}</p> -->
+                                  
                                 </div>
 
                                 <div class="d-flex justify-content-between mb-5">
                                   <p class="text-muted mb-0"><span class="fw-bold me-4">Total paid: </span> ₹
                                     <%=order.totalAmount%>
-                                      <br><span class="fw-bold me-4">Discount : </span>
-                                      <%if(order.discount !="" ){%>
+                                      <br>
+                                      <%if(order.discount >0 ){%>
+                                        <span class="fw-bold me-4">Discount : </span>
                                         ₹<%=order.discount%> <br> <span class="fw-bold me-4">Total : </span> ₹
                                         <%=order.totalAmount+order.discount%>
-                                            <%}else{%> 0.00
+                                            <%}else{%> <span class="fw-bold me-4">Discount : </span>₹0.00
                                               <%}%> <br>
-                                                <%if(order.refund !="" ){%><span class="fw-bold me-4">Refund : </span>
+                                                <%if(order.refund >0 ){%><span class="fw-bold me-4">Refund : </span>
                                                   ₹<%=order.refund%>
                                                     <%}%>
                                   </p>
