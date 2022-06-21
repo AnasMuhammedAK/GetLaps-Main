@@ -482,7 +482,10 @@ console.log("jihihhhhhihihihih");
 
 // -------------------------------------When search
 router.post("/getChartDatas", async (req, res) => {
-
+  let orders=await adminHelpers.getLastOrders()
+  console.log(orders)
+  let products=await productHelpers.getNewProducts()
+  let users=await userHelpers.getNewUsers()
   const date = new Date(Date.now());
   const month = date.toLocaleString("default", { month: "long" });
   adminHelpers.salesReport(req.body).then((data) => {
@@ -531,7 +534,7 @@ router.post("/getChartDatas", async (req, res) => {
 console.log("jihihhhhhihihihih");
     console.log(dateArray, totalArray,orderCount,cod,razorpay,allOrderStatus);
 
-    res.render('admin/searchReport',{text,dateArray, totalArray, brandArray, sumArray,orderCount ,Sales,successPayment,cod,razorpay,refund,allOrderStatus})
+    res.render('admin/searchReport',{text,dateArray, totalArray, brandArray, sumArray,orderCount ,Sales,successPayment,cod,razorpay,refund,allOrderStatus,orders,products,users})
     // res.json({ dateArray, totalArray, brandArray, sumArray,orderCount ,Sales,successPayment,cod,razorpay,refund,allOrderStatus})
   });
 });

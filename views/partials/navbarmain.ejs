@@ -17,7 +17,14 @@ display: none;
         display: block;
     }
 }
-
+#shopicon{
+    display: none;
+}
+@media only screen and (max-width: 767px) {
+    #shopicon{
+        display: block;
+    }
+}
  </style>
 <nav style="position: sticky;
 top: 0;
@@ -29,6 +36,7 @@ z-index:9;" class="navbar navbar-expand-lg navbar-light bg-dark">
             <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="/">
                 <img src="/images/GetLaps.jpg" height="50" alt="Logo" loading="lazy" style="margin-top: 2px;" />
             </a>
+            <a  class="navbar-brand text-white me-2 mb-1 d-flex align-items-cente" href="/shop"><span id="shopicon"><strong>Shop</strong></span></a>
 
 
         </div>
