@@ -109,8 +109,55 @@ module.exports = {
             },
           }
         )
-        .then((response) => {
-          resolve(response);
+        .then(async() => {
+          let orderItems = await db
+        .get()
+        .collection(collection.ORDER_COLLECTION)
+        .aggregate([
+          {
+            $match: { _id: ObjectId(orderId) },
+          },
+          {
+            $unwind: "$products",
+          },
+          {
+            $project: {
+              item: "$products.item",
+              quantity: "$products.quantity",
+              status:"$products.status",
+              subtotal:"$products.subtotal"
+            },
+          },
+          {
+            $lookup: {
+              from: collection.PRODUCT_COLLECTION,
+              localField: "item",
+              foreignField: "_id",
+              as: "product",
+            },
+          },
+          {
+            $project: {
+              item: 1,subtotal:1,status:1,
+              quantity: 1,
+              product: { $arrayElemAt: ["$product", 0] },
+              //-------------------------------------
+              subtotal: { $multiply: [{ $arrayElemAt: ["$product.price", 0] }, "$quantity"] }
+            },
+          },
+        ])
+        .toArray()
+        console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
+        console.log(orderItems)
+        orderItems.map(async(product)=>{
+          let quantity=product.quantity
+          let proId=product.item
+          await db.get().collection(collection.PRODUCT_COLLECTION).updateOne({_id:ObjectId(proId)},{
+            $inc:{stock:quantity}
+          })
+           resolve();
+        })
+          
         });
     });
   },

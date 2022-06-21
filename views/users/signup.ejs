@@ -103,7 +103,7 @@
             fullname: {
               required: true,
               minlength: 4,
-              maxlength: 15,
+              maxlength: 20,
               namevalidation: true
             },
             password: {
@@ -129,7 +129,7 @@
             fullname: {
               required: "Please enter your name",
               minlength: "At least 4 characters required",
-              maxlength: "Maximum 15 characters are allowed"
+              maxlength: "Maximum 20 characters are allowed"
             },
             password: {
               required: "Enter Your Password",
@@ -157,7 +157,7 @@
 
         })
         $.validator.addMethod("namevalidation", function (value, element) {
-          return /^[A-Za-z]+$/.test(value);
+          return /^[a-zA-Z ]*$/.test(value);
         },
           "Sorry..! Only alphabets are allowed"
         );

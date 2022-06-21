@@ -64,7 +64,7 @@
                                                 <td>
                                                     <div>RS.<%=x.totalAmount %>
                                                     </div>
-                                                    <%if(x.discount !="" ){%>
+                                                    <%if(x.discount >0 ){%>
                                                         <div>Discount : RS.<%=x.discount %>
                                                         </div>
                                                         <%}%>
@@ -73,7 +73,12 @@
                                                 <td>
                                                     <div>Method : <%=x.paymentMethod %>
                                                     </div>
-                                                    <div>Payment Status : <%=x.paymentStatus %>
+                                                    <div>
+                                                        <%if(x.paymentStatus != "pending"){%>
+                                                        Payment Status : <%=x.paymentStatus %>
+                                                        <%}else{%>
+                                                        <h5 class="text-warning"><strong>Payment is pending</strong></h5><br>
+                                                        <%}%>
                                                     </div>
                                                 </td>
 
@@ -85,7 +90,7 @@
                                                     <%if(x.paymentStatus!="pending"){%>
                                                     <%if(x.status=="placed"){%>
                                                         <a class="btn btn-danger delete-button"
-                                                            href="/cancelOrder/<%=x._id %>/?refund=<%=x.totalAmount %>">Cancel Order</a>
+                                                        href="/cancelOrder/<%=x._id %>/?refund=<%=x.totalAmount %>"><img style="width: 30px;height: auto;" src="https://cdn-icons-png.flaticon.com/512/1828/1828851.png" alt=""></a>
                                                         <%}else if(x.status=="Shipped" ){%>
                                                             <h5 class="text-success">Order Shipped</h5>
                                                             <%}else if(x.status=="Delivered" ){%>
@@ -93,7 +98,12 @@
                                                                 <%}else if(x.status=="Cancelled" ){%>
                                                                     <h5 class="text-danger">Order Cancelled</h5>
                                                                     <%}%>
-                                                                    <%}else{%> <h5 class="text-warning">Payment is pending</h5>
+                                                                    <%}else{%> 
+<div class="d-flex">
+    <button  class="btn btn-success" onclick="paynow('<%=x.totalAmount %>','<%=x._id %>')">Pay Now</button> 
+                                                                    <a class="btn btn-danger delete-button"
+                                                            href="/cancelOrder/<%=x._id %>/?refund=<%=x.totalAmount %>"><img style="width: 30px;height: auto;" src="https://cdn-icons-png.flaticon.com/512/1828/1828851.png" alt=""></a>
+</div>
                                                                         <%}%>
                                                 </td>
                                                 <!-- ------------------------- -->
@@ -223,5 +233,84 @@
 
                                 })
 
+                            </script>
+                            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                            <script>
+                               function paynow(total,orderId){
+                                    $.ajax({
+                                        url: '/paynow',
+                                        method: 'post',
+                                        data:{
+total:total,
+orderId:orderId
+                                        },
+                                        
+                                        success: (Response) => {
+                                            if (!Response.stockout) {
+                                                if (Response.codSuccess) {
+                                                    location.href = '/order-compleated'
+                                                } else {
+                                                    razorpayPayment(Response)
+                                                }
+                                            } else {
+                                                Swal.fire(
+                                                    'Out of stock..!',
+                                                    'Your cart has a stockout product',
+                                                    'error'
+                                                )
+                                            }
+                                        }
+                    
+                                    })
+                                }
+                                function razorpayPayment(order) {
+                                    var options = {
+                                        "key": "rzp_test_DLe9uyAPiBCjNy", // Enter the Key ID generated from the Dashboard
+                                        "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                                        "currency": "INR",
+                                        "name": "GetLaps",
+                                        "description": "Test Transaction",
+                                        "image": "https://example.com/your_logo",
+                                        "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                                        "handler": function (response) {
+                                            // alert(response.razorpay_payment_id);
+                                            // alert(response.razorpay_order_id);
+                                            // alert(response.razorpay_signature)
+                                            
+                                            verifyPeyment(response, order)
+                                        },
+                                        "prefill": {
+                                            "name": "Gaurav Kumar",
+                                            "email": "gaurav.kumar@example.com",
+                                            "contact": "9999999999"
+                                        },
+                                        "notes": {
+                                            "address": "Razorpay Corporate Office"
+                                        },
+                                        "theme": {
+                                            "color": "#3399cc"
+                                        }
+                                    };
+                                    var rzp1 = new Razorpay(options)
+                                    rzp1.open()
+                                }
+                                function verifyPeyment(payment, order) {
+                                    
+                                    $.ajax({
+                                        url: '/verify-payment',
+                                        data: {
+                                            payment,
+                                            order
+                                        },
+                                        method: 'post',
+                                        success: (response) => {
+                                            if (response.status) {
+                                                location.href = '/order-compleated'
+                                            } else {
+                                                alert(response.msg)
+                                            }
+                                        }
+                                    })
+                                }
                             </script>
                             <%- include('../partials/foot') %>

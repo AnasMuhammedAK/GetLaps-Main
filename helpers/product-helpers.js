@@ -124,7 +124,24 @@ module.exports = {
         });
     });
   },
-
+//checkQuantity
+checkQuantity:(proId,qty,count)=>{
+  return new Promise(async(resolve,reject)=>{
+   let product=await db.get()
+      .collection(collection.PRODUCT_COLLECTION)
+      .findOne({ _id: ObjectId(proId) })
+      if(count !=-1){
+        if(product.stock>qty){
+          resolve({status:true})
+        }else{
+          resolve({status:false})
+        }
+      }else{
+        resolve({status:true})
+      }
+      
+  })
+},
   //category
   //add product category
   addCategory: (cateData) => {
@@ -257,30 +274,65 @@ module.exports = {
     });
   },
   //filter
-  searchFilter :(filter,price) => {
+  searchFilter :(brandFilter,cateFilter,price) => {
     return new Promise(async (resolve, reject) => {
-        let result
-        if (filter.length>0){
-             result = await db.get().collection(collection.PRODUCT_COLLECTION).aggregate([
+            let result
+
+            if(brandFilter.length>0 && cateFilter.length>0  ){
+                 result = await db.get().collection(collection.PRODUCT_COLLECTION).aggregate([
+                    {
+                        $match:{$or:brandFilter}
+                        
+                    },
+
+                    {
+                        $match:{$or:cateFilter}
+                        
+                    },
+                    {
+                        $match:{price:{$lt:price}}
+                    }
+                ]).toArray()
+            } 
+
+            else if(brandFilter.length>0 && cateFilter.length==0  ){
+ 
+                result = await db.get().collection(collection.PRODUCT_COLLECTION).aggregate([
+                    {
+                        $match:{$or:brandFilter}
+                        
+                    },
+                    {
+                        $match:{price:{$lt:price}}
+                    }
+                ]).toArray()
+
+
+            }
+            else if(brandFilter.length==0 && cateFilter.length>0 )
+            result = await db.get().collection(collection.PRODUCT_COLLECTION).aggregate([
+               
                 {
-                    $match:{ $or:filter}
+                    $match:{$or:cateFilter}
+                    
                 },
                 {
                     $match:{price:{$lt:price}}
                 }
             ]).toArray()
-        } else{
-             result = await db.get().collection(collection.PRODUCT_COLLECTION).aggregate([
-                
-                {
-                    $match:{price:{$lt:price}}
-                }
-            ]).toArray()
-        }
+
         
-        // console.log("",result);
-        resolve(result)
-    })
+            else{
+                 result = await db.get().collection(collection.PRODUCT_COLLECTION).aggregate([
+                    
+                    {
+                        $match:{price:{$lt:price}}
+                    }
+                ]).toArray()
+            }
+            
+            resolve(result)
+        })
   },
   //or---------------------
   //with brands

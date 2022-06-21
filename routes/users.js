@@ -280,24 +280,34 @@ router.get("/cart", veryfyUserLogin, async (req, res) => {
 });
 router.post("/changeProductQuandity/:id", (req, res, next) => {
   let proId = req.body.product;
-  userHelpers.changeProductQuantity(req.body).then(async (response) => {
-    response.total = await userHelpers.getTotalAmount(req.params.id);
-    response.subTotal = await userHelpers.getTotalAmountForOneProduct(
-      req.params.id,
-      proId
-    );
-    let products = await userHelpers.getCartproducts(req.session.user._id);
-    let discount = 0;
-
-    products.forEach((row) => {
-      discount += row.quantity * row.product.discound;
-    });
-
-    response.discount = discount;
-
-    console.log(response);
-    res.json(response);
-  });
+  let quantity=req.body.quantity
+  let count=parseInt((req.body.count))
+  console.log(proId+"   "+quantity+"   "+count)
+  productHelpers.checkQuantity(proId,quantity,count).then((response)=>{
+    if(response.status){
+      userHelpers.changeProductQuantity(req.body).then(async (response) => {
+        response.total = await userHelpers.getTotalAmount(req.params.id);
+        response.subTotal = await userHelpers.getTotalAmountForOneProduct(
+          req.params.id,
+          proId
+        );
+        let products = await userHelpers.getCartproducts(req.session.user._id);
+        let discount = 0;
+    
+        products.forEach((row) => {
+          discount += row.quantity * row.product.discound;
+        });
+    
+        response.discount = discount;
+    
+        console.log(response);
+        res.json(response);
+      });
+    }else{
+      res.json({stockout:true})
+    }
+  })
+  
 });
 //add to wishlist
 router.get("/addToWishlist/:id", (req, res) => {
@@ -408,6 +418,7 @@ router.get("/place-order", veryfyUserLogin, (req, res) => {
 });
 router.post("/placeOrder", async (req, res) => {
   //console.log(req.body)
+  req.session.checkoutData=req.body
   let products = await userHelpers.getCartproductsList(req.body.userId);
   products.forEach((x) => {
     x.status = "Ordered";
@@ -415,8 +426,10 @@ router.post("/placeOrder", async (req, res) => {
   });
   if (req.session.couponTotal) {
     var totalPrice = req.session.couponTotal;
+    req.session.cartTotal=totalPrice
   } else {
     totalPrice = await userHelpers.getTotalAmount(req.body.userId);
+    req.session.cartTotal=totalPrice
   }
   userHelpers.checkStock(products).then((response) => {
     if (response.stockout) {
@@ -449,9 +462,24 @@ router.post("/placeOrder", async (req, res) => {
     }
   });
 });
+//paynow
+router.post('/paynow',async(req,res)=>{
+  console.log("koooooooooooooooooooooyyyyyyyyyyyyyyyyyyyyyyyy")
+  console.log(req.body)
+  let totalAmount=parseInt(req.body.total)
+  let orderId=req.body.orderId
+  
+  userHelpers
+                  .generateRazorpay(orderId, totalAmount)
+                  .then((order) => {
+                    console.log(order);
+                    console.log("koooooooooooooooooooooyyyyyyyyyyyyyyyyyyyyyyyy")
+                     res.json(order);
+                  });
+})
 //verify payment
 router.post("/verify-payment", (req, res) => {
-  console.log("koooooooooooooooooooooyyyyyyyyyyyyyyyyyyyyyyyy")
+ 
   console.log(req.body);
   userHelpers
     .verifyPayment(req.body)
@@ -481,11 +509,15 @@ router.get("/orders", veryfyUserLogin, async (req, res) => {
   let cartCount = await userHelpers.getCartCount(req.session.user._id);
   let orders = await userHelpers.getAllOrders(req.session.user._id);
   let wishCount = await userHelpers.getWishCount(req.session.user._id);
+  
+  console.log('lssssssssssssssssssssssssssssss')
+  console.log(orders.products)
   res.render("users/orders-table", {
     userData: req.session.user,
     orders,
     cartCount,
     wishCount,
+    checkoutData:req.session.checkoutData
   });
 });
 
@@ -504,8 +536,9 @@ router.get("/view-order-products/:id", veryfyUserLogin, async (req, res) => {
   });
 });
 ///cancelOrder
-router.get("/cancelOrder/:id", (req, res) => {
+router.get("/cancelOrder/:id", async(req, res) => {
   adminHelpers.cancelOrder(req.params.id, req.query.refund,"Cancelled").then(() => {
+   
     res.redirect("/orders");
   });
 });
@@ -695,18 +728,19 @@ router.post('/filter-results', (req, res) => {
   console.log(req.body);
   let data = req.body
   let price = parseInt(data.price)
-  let filter = []
+  let brandFilter = []
+  let cateFilter=[]
   for (let i of data.brand) {
-    filter.push({ 'brand': i })
+    brandFilter.push({ 'brand': i })
   }
   for (let i of data.category) {
-    filter.push({ 'category': i })
+    cateFilter.push({ 'category': i })
   }
-  productHelpers.searchFilter(filter, price).then((result) => {
+  productHelpers.searchFilter(brandFilter,cateFilter, price).then((result) => {
     filterResult = result
     res.json({ status: true })
   })
-  console.log(filter);
+ 
 })
 
 
