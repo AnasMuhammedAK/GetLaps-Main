@@ -139,29 +139,37 @@
                     $.ajax({
                         url: "/add-tocart/" + proId,
                         methode: "get",
-                        success: (Response) => {
-
-                            if (Response.newProduct) {
-                                Swal.fire({
-                                    position: 'top-center',
-                                    icon: 'success',
-                                    title: 'Product Added To Cart',
-                                    showConfirmButton: false,
-                                    timer: 1000
-                                })
-                                //location.reload()
-                                let count = $('#cart-count').html()
-                                count = parseInt(count) + 1
-                                $("#cart-count").html(parseInt(count))
-                            } else if (Response.oldProduct) {
-                                Swal.fire({
-                                    position: 'top-center',
-                                    icon: 'success',
-                                    title: 'Product Added To Cart',
-                                    showConfirmButton: false,
-                                    timer: 1000
-                                })
+                        success: (Response) =>{
+                            if (Response.gust) {
+                                Swal.fire(
+                                    'Oops!',
+                                    'You Need To Login',
+                                    'error'
+                                )
+                            } else {
+                                if (Response.newProduct) {
+                                    Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'success',
+                                        title: 'Product Added To Cart',
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                    })
+                                    //location.reload()
+                                    let count = $('#cart-count').html()
+                                    count = parseInt(count) + 1
+                                    $("#cart-count").html(parseInt(count))
+                                } else if (Response.oldProduct) {
+                                    Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'success',
+                                        title: 'Product Added To Cart',
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                    })
+                                }
                             }
+
                         }
                     })
                 }
@@ -170,33 +178,41 @@
                         url: "/addToWishlist/" + proId,
                         methode: "get",
                         success: (Response) => {
+                            if (Response.gust) {
+                                Swal.fire(
+                                    'Oops!',
+                                    'You Need To Login',
+                                    'error'
+                                )
+                            } else {
+                                if (Response.newProduct) {
+                                    Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'success',
+                                        title: 'Product Added To Wishlist',
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                    })
+                                    //location.reload()
+                                    let count = $('#wishlist-count').html()
+                                    count = parseInt(count) + 1
+                                    $("#wishlist-count").html(parseInt(count))
 
-                            if (Response.newProduct) {
-                                Swal.fire({
-                                    position: 'top-center',
-                                    icon: 'success',
-                                    title: 'Product Added To Wishlist',
-                                    showConfirmButton: false,
-                                    timer: 1000
-                                })
-                                //location.reload()
-                                let count = $('#wishlist-count').html()
-                                count = parseInt(count) + 1
-                                $("#wishlist-count").html(parseInt(count))
+                                } else if (Response.oldProduct) {
+                                    Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'success',
+                                        title: 'Product Removed From wishlist',
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                    })
+                                    let count = $('#wishlist-count').html()
+                                    count = parseInt(count) - 1
+                                    $("#wishlist-count").html(parseInt(count))
 
-                            } else if (Response.oldProduct) {
-                                Swal.fire({
-                                    position: 'top-center',
-                                    icon: 'success',
-                                    title: 'Product Removed From wishlist',
-                                    showConfirmButton: false,
-                                    timer: 1000
-                                })
-                                let count = $('#wishlist-count').html()
-                                count = parseInt(count) - 1
-                                $("#wishlist-count").html(parseInt(count))
-
+                                }
                             }
+
                         }
                     })
                 }

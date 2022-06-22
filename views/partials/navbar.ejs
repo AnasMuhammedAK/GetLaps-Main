@@ -6,7 +6,7 @@ z-index:9;" class="navbar navbar-expand-lg navbar-light bg-dark">
         <!-- Left elements -->
         <div class="d-flex">
             <!-- Brand -->
-            <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+            <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="/">
                 <img src="/images/GetLaps.jpg" height="50" alt="Logo" loading="lazy" style="margin-top: 2px;" />
             </a>
 
@@ -16,17 +16,20 @@ z-index:9;" class="navbar navbar-expand-lg navbar-light bg-dark">
 
         <!-- Center elements -->
         <ul class="navbar-nav flex-row d-none d-md-flex">
-            <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
-                <img src="/images/logo.png" height="50" alt="Logo" loading="lazy" style="margin-top: 2px;" />
-            </a>
+           <li> <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="/shop">
+            <img src="/images/logo.png" height="50" alt="Logo" loading="lazy" style="margin-top: 2px;" />
+        </a></li>
             <!-- Search form -->
-            <form class="input-group w-auto my-auto d-none d-sm-flex">
+            <form class="input-group w-auto my-auto d-none d-sm-flex" method="post" action="/getSearchProducts" id="search-form">
                 <!-- <span class="input-group-text border-0 d-none d-lg-flex bg-light"><i class="fas fa-search "></i></span> -->
-                <input autocomplete="off" type="search" class="form-control" placeholder="Search"
+                <input autocomplete="off" id="search-box" name="key" type="text" class="form-control" placeholder="Search"
                     style="min-width: 125px;" />
+                   <button   style="border: none ;outline: none;background-color: black;color: white; width: 40px;" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                  </svg></button>
+                  
 
             </form>
-            </li>
         </ul>
         <!-- Center elements -->
 
@@ -36,14 +39,14 @@ z-index:9;" class="navbar navbar-expand-lg navbar-light bg-dark">
                 <a class="nav-link d-sm-flex align-items-sm-center" href="/login">
                     <!-- <img src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" class="rounded-circle" height="30"
                         alt="Black and White Portrait of a Man" loading="lazy" /> -->
-                        
-                       
-                            <strong class="d-none d-sm-block ms-1 text-white">Login</strong>
-                       
-                    
+
+
+                    <strong class="d-none d-sm-block ms-1 text-white">Login</strong>
+
+
                 </a>
             </li>
-           
+
             <li class="nav-item me-3 me-lg-1">
                 <a class="nav-link" href="/login">
 
@@ -57,34 +60,7 @@ z-index:9;" class="navbar navbar-expand-lg navbar-light bg-dark">
                     <span><i class="fa-solid fa-heart text-white"></i></span>
                     <!-- <span class="badge rounded-pill badge-notification bg-danger">6</span> -->
                 </a>
-            </li>
-            <li class="nav-item dropdown me-3 me-lg-1 ">
-                <a
-                  class="nav-link dropdown-toggle hidden-arrow"
-                  href="#"
-                  id="navbarDropdownMenuLink"
-                  role="button"
-                  data-mdb-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-chevron-circle-down fa-lg text-white"></i>
-                </a>
-                <ul
-                  class="dropdown-menu dropdown-menu-end"
-                  aria-labelledby="navbarDropdownMenuLink"
-                >
-                  <li>
-                      <form class="">
-                          
-                          <input autocomplete="off" type="search" class="form-control" placeholder="Search"
-                              style="min-width: 125px;" />
-          
-                      </form>
-                  </li>
-                  
-                  
-                </ul>
-              </li>
+
 
 
         </ul>

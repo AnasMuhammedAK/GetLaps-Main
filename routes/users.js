@@ -62,23 +62,34 @@ const veryfyUserLogin = (req, res, next) => {
 };
 
 //login
-router.get("/", veryfyUserLogin, (req, res) => {
+router.get("/",  (req, res) => {
   productHelpers.getAllBrands().then((brands) => {
-    productHelpers.getnewProduct().then((newProducts) => {
-      userHelpers.getCartCount(req.session.user._id).then(async (cartCount) => {
-        let wishCount = await userHelpers.getWishCount(req.session.user._id);
+    productHelpers.getnewProduct().then(async(newProducts) => {
+        let cartCount
+        let wishCount
+        let userData={}
+        if(req.session.userLoggedIn){
+           cartCount=await userHelpers.getCartCount(req.session.user._id)
+         wishCount = await userHelpers.getWishCount(req.session.user._id);
+         userData= req.session.user
+        }else{
+          cartCount=0
+          wishCount=0
+          fullname="Login"
+          userData.fullname=fullname
+        }
         let banners = await adminHelpers.getBanners()
         let posters1 = await adminHelpers.getPosters1()
         let posters2 = await adminHelpers.getPosters2()
         let gamingLap = await productHelpers.getGamingLap()
         res.render("users/home", {
-          userData: req.session.user,
+          userData: userData,
           brands,
           newProducts,
           cartCount,
           wishCount,banners,posters1,posters2,gamingLap
         });
-      });
+      
     });
   });
 });
@@ -245,13 +256,17 @@ router.post("/newPassword/:mobile", (req, res) => {
 });
 //add to cart
 router.get("/add-tocart/:id", async(req, res) => {
- 
+ if(req.session.userLoggedIn){
   userHelpers
-    .addToCart(req.params.id, req.session.user._id)
-    .then((response) => {
-      
-      res.json(response);
-    });
+  .addToCart(req.params.id, req.session.user._id)
+  .then((response) => {
+    
+    res.json(response);
+  });
+ }else{
+  res.json({gust:true})
+ }
+ 
 });
 //cart view
 router.get("/cart", veryfyUserLogin, async (req, res) => {
@@ -311,12 +326,17 @@ router.post("/changeProductQuandity/:id", (req, res, next) => {
 });
 //add to wishlist
 router.get("/addToWishlist/:id", (req, res) => {
-  console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-  userHelpers
-    .addToWishlist(req.params.id, req.session.user._id)
-    .then((response) => {
-      res.json(response);
-    });
+  if(req.session.userLoggedIn){
+    console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+    userHelpers
+      .addToWishlist(req.params.id, req.session.user._id)
+      .then((response) => {
+        res.json(response);
+      });
+  }else{
+    res.json({gust:true})
+  }
+  
 });
 //add to cart from wishlist
 router.get("/addToCart/:id", (req, res) => {
@@ -353,36 +373,56 @@ router.get("/removeWishProduct/:id", (req, res) => {
   });
 });
 //shopping
-router.get("/shopping", veryfyUserLogin, async (req, res) => {
+router.get("/shopping",  async (req, res) => {
   let brands = await productHelpers.getAllBrands();
-  let wishCount = await userHelpers.getWishCount(req.session.user._id);
-  console.log(brands);
-  let categories = await productHelpers.getAllCategory();
-  // productHelpers.getAllProduct().then((products) => {
-    userHelpers.getCartCount(req.session.user._id).then((cartCount) => {
+ let categories = await productHelpers.getAllCategory();
+  let cartCount
+  let wishCount
+  let userData={}
+  if(req.session.userLoggedIn){
+     cartCount=await userHelpers.getCartCount(req.session.user._id)
+   wishCount = await userHelpers.getWishCount(req.session.user._id);
+   userData= req.session.user
+  }else{
+    cartCount=0
+    wishCount=0
+    fullname="Login"
+    userData.fullname=fullname
+  }
       res.render("users/shop", {
-        userData: req.session.user,
+        userData: userData,
         filterResult,
         cartCount,
         brands,
         categories,
         wishCount,
       });
-    });
+    
   // });
 });
 //view product details
-router.get("/view-products/:id", veryfyUserLogin, async (req, res) => {
+router.get("/view-products/:id",  async (req, res) => {
   let product = await productHelpers.getOneProductDetails(req.params.id);
-  let wishCount = await userHelpers.getWishCount(req.session.user._id);
-  userHelpers.getCartCount(req.session.user._id).then((cartCount) => {
+  let cartCount
+  let wishCount
+  let userData={}
+  if(req.session.userLoggedIn){
+     cartCount=await userHelpers.getCartCount(req.session.user._id)
+   wishCount = await userHelpers.getWishCount(req.session.user._id);
+   userData= req.session.user
+  }else{
+    cartCount=0
+    wishCount=0
+    fullname="Login"
+    userData.fullname=fullname
+  }
     res.render("users/view-product", {
-      userData: req.session.user,
+      userData: userData,
       cartCount,
       product,
       wishCount,
     });
-  });
+  
 });
 //dlete product from cart
 router.post("/deleteCartProduct", (req, res) => {

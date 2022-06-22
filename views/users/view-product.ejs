@@ -1,51 +1,51 @@
 <%- include('../partials/head') %>
-<%- include('../partials/navbarmain') %>
+    <%- include('../partials/navbarmain') %>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+            rel="stylesheet">
 
-    <!-- Css Styles -->
-    <!-- <link rel="stylesheet" href="/client/css/bootstrap.min.css" type="text/css">
+        <!-- Css Styles -->
+        <!-- <link rel="stylesheet" href="/client/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/client/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/client/css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="/client/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="/client/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="/client/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/client/css/slicknav.min.css" type="text/css"> -->
-    <link rel="stylesheet" href="/client/css/style.css" type="text/css">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
-   
-<!-- xzoom plugin here -->
-<script src="/zoom/js/vendor/jquery.js"></script>
-<script type="text/javascript" src="/zoom/xzoom.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/zoom/xzoom.css" media="all" /> 
-<!-- hammer plugin here -->
+        <link rel="stylesheet" href="/client/css/style.css" type="text/css">
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+        <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
+
+        <!-- xzoom plugin here -->
+        <script src="/zoom/js/vendor/jquery.js"></script>
+        <script type="text/javascript" src="/zoom/xzoom.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/zoom/xzoom.css" media="all" />
+        <!-- hammer plugin here -->
 
 
-    <!-- <link rel="stylesheet" href="/zoom/css/normalize.css" /> -->
-    <!-- <link rel="stylesheet" href="/zoom/css/foundation.css" /> -->
-    <!-- <link rel="stylesheet" href="/zoom/css/demo.css" /> -->
-    <!-- <script src="/zoom/js/vendor/modernizr.js"></script> -->
-   
-  <!-- <script type="text/javascript" src="/zoom/hammer.js/1.0.5/jquery.hammer.min.js"></script>   -->
-  <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <!-- <link type="text/css" rel="stylesheet" media="all" href="/zoom/fancybox/source/jquery.fancybox.css" />
+        <!-- <link rel="stylesheet" href="/zoom/css/normalize.css" /> -->
+        <!-- <link rel="stylesheet" href="/zoom/css/foundation.css" /> -->
+        <!-- <link rel="stylesheet" href="/zoom/css/demo.css" /> -->
+        <!-- <script src="/zoom/js/vendor/modernizr.js"></script> -->
+
+        <!-- <script type="text/javascript" src="/zoom/hammer.js/1.0.5/jquery.hammer.min.js"></script>   -->
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <!-- <link type="text/css" rel="stylesheet" media="all" href="/zoom/fancybox/source/jquery.fancybox.css" />
   <link type="text/css" rel="stylesheet" media="all" href="/zoom/magnific-popup/css/magnific-popup.css" /> -->
-  <!-- <script type="text/javascript" src="/zoom/fancybox/source/jquery.fancybox.js"></script>
+        <!-- <script type="text/javascript" src="/zoom/fancybox/source/jquery.fancybox.js"></script>
   <script type="text/javascript" src="/zoom/magnific-popup/js/magnific-popup.js"></script>   -->
 
-   
 
 
 
-        
+
+
 
         <!-- Breadcrumb Begin -->
         <div class="breadcrumb-option">
@@ -55,47 +55,60 @@
                         <div class="breadcrumb__links">
                             <a href="/"><i class="fa fa-home"></i> Home</a>
                             <a href="/shop">Shop</a>
-                            <span><%=product.title%></span>
+                            <span>
+                                <%=product.title%>
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Breadcrumb End -->
-       
+
         <!-- Product Details Section Begin -->
         <section class="product-details spad">
             <div class="container">
                 <div class="row">
-                   
+
                     <div class="col-lg-6">
-                         <!-- default start -->
-    <section id="default" class="padding-top0">
-        <div class="row">
-          <div class="large-12 column"></div>
-          <div class="large-5 column">
-            <div class="xzoom-container">
-              <img class="xzoom" id="xzoom-default" src="/uploads/<%=product.image[0].image1%>" xoriginal="/uploads/<%=product.image[0].image1%>" />
-              <div class="xzoom-thumbs mt-5">
-                <a href="/uploads/<%=product.image[0].image1%>"><img class="xzoom-gallery" width="80" src="/uploads/<%=product.image[0].image1%>"  xpreview="/uploads/<%=product.image[0].image1%>" ></a>
-                <a href="/uploads/<%=product.image[1].image2%>"><img class="xzoom-gallery" width="80" src="/uploads/<%=product.image[1].image2%>" ></a>
-                <a href="/uploads/<%=product.image[2].image3%>"><img class="xzoom-gallery" width="80" src="/uploads/<%=product.image[2].image3%>" ></a>
-                <a href="/uploads/<%=product.image[3].image4%>"><img class="xzoom-gallery" width="80" src="/uploads/<%=product.image[3].image4%>" ></a>
-              </div>
-            </div>        
-          </div>
-          <div class="large-7 column"></div>
-        </div>
-        </section>
-        <!-- default end -->
-                        
+                        <!-- default start -->
+                        <section id="default" class="padding-top0">
+                            <div class="row">
+                                <div class="large-12 column"></div>
+                                <div class="large-5 column">
+                                    <div class="xzoom-container">
+                                        <img class="xzoom" id="xzoom-default"
+                                            src="/uploads/<%=product.image[0].image1%>"
+                                            xoriginal="/uploads/<%=product.image[0].image1%>" />
+                                        <div class="xzoom-thumbs mt-5">
+                                            <a href="/uploads/<%=product.image[0].image1%>"><img class="xzoom-gallery"
+                                                    width="80" src="/uploads/<%=product.image[0].image1%>"
+                                                    xpreview="/uploads/<%=product.image[0].image1%>"></a>
+                                            <a href="/uploads/<%=product.image[1].image2%>"><img class="xzoom-gallery"
+                                                    width="80" src="/uploads/<%=product.image[1].image2%>"></a>
+                                            <a href="/uploads/<%=product.image[2].image3%>"><img class="xzoom-gallery"
+                                                    width="80" src="/uploads/<%=product.image[2].image3%>"></a>
+                                            <a href="/uploads/<%=product.image[3].image4%>"><img class="xzoom-gallery"
+                                                    width="80" src="/uploads/<%=product.image[3].image4%>"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="large-7 column"></div>
+                            </div>
+                        </section>
+                        <!-- default end -->
+
                     </div>
 
                     <div class="col-lg-6">
                         <div class="product__details__text">
 
                             <h3>
-                                <%=product.title%> <span>Brand: <strong><%=product.brand%> </strong><br> <%=product.category%></span>
+                                <%=product.title%> <span>Brand: <strong>
+                                            <%=product.brand%>
+                                        </strong><br>
+                                        <%=product.category%>
+                                    </span>
                             </h3>
 
                             <div class="rating">
@@ -118,7 +131,8 @@
                                     <input type="text" value="1">
                                 </div>
                             </div> -->
-                                <button onclick="addToWishlist('<%=product._id%>')" class="btn btn-danger me-4">Add to wishlist</button>
+                                <button onclick="addToWishlist('<%=product._id%>')" class="btn btn-danger me-4">Add to
+                                    wishlist</button>
                                 <button href="#" onclick="addToCart('<%=product._id%>')"
                                     class="btn btn-success mt-1"><span class="icon_bag_alt"></span> Add to cart</button>
                                 <ul>
@@ -207,36 +221,44 @@
         <%- include('../partials/userfooter') %>
             <!-- Footer Section End -->
 
-<!--Sweet Alert CDN-->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <!--Sweet Alert CDN-->
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
                 function addToCart(proId) {
                     $.ajax({
                         url: "/add-tocart/" + proId,
                         methode: "get",
                         success: (Response) => {
-
-                            if (Response.newProduct) {
-                                Swal.fire({
-                                    position: 'top-center',
-                                    icon: 'success',
-                                    title: 'Product Added To Cart',
-                                    showConfirmButton: false,
-                                    timer: 1000
-                                })
-                                //location.reload()
-                                let count = $('#cart-count').html()
-                                count = parseInt(count) + 1
-                                $("#cart-count").html(parseInt(count))
-                            } else if (Response.oldProduct) {
-                                Swal.fire({
-                                    position: 'top-center',
-                                    icon: 'success',
-                                    title: 'Product Added To Cart',
-                                    showConfirmButton: false,
-                                    timer: 1000
-                                })
+                            if (Response.gust) {
+                                Swal.fire(
+                                    'Oops!',
+                                    'You Need To Login',
+                                    'error'
+                                )
+                            } else {
+                                if (Response.newProduct) {
+                                    Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'success',
+                                        title: 'Product Added To Cart',
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                    })
+                                    //location.reload()
+                                    let count = $('#cart-count').html()
+                                    count = parseInt(count) + 1
+                                    $("#cart-count").html(parseInt(count))
+                                } else if (Response.oldProduct) {
+                                    Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'success',
+                                        title: 'Product Added To Cart',
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                    })
+                                }
                             }
+
                         }
                     })
                 }
@@ -245,43 +267,51 @@
                         url: "/addToWishlist/" + proId,
                         methode: "get",
                         success: (Response) => {
+                            if (Response.gust) {
+                                Swal.fire(
+                                    'Oops!',
+                                    'You Need To Login',
+                                    'error'
+                                )
+                            } else {
+                                if (Response.newProduct) {
+                                    Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'success',
+                                        title: 'Product Added To Wishlist',
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                    })
+                                    //location.reload()
+                                    let count = $('#wishlist-count').html()
+                                    count = parseInt(count) + 1
+                                    $("#wishlist-count").html(parseInt(count))
 
-                            if (Response.newProduct) {
-                                Swal.fire({
-                                    position: 'top-center',
-                                    icon: 'success',
-                                    title: 'Product Added To Wishlist',
-                                    showConfirmButton: false,
-                                    timer: 1000
-                                })
-                                //location.reload()
-                                let count = $('#wishlist-count').html()
-                                count = parseInt(count) + 1
-                                $("#wishlist-count").html(parseInt(count))
+                                } else if (Response.oldProduct) {
+                                    Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'success',
+                                        title: 'Product Removed From wishlist',
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                    })
+                                    let count = $('#wishlist-count').html()
+                                    count = parseInt(count) - 1
+                                    $("#wishlist-count").html(parseInt(count))
 
-                            } else if (Response.oldProduct) {
-                                Swal.fire({
-                                    position: 'top-center',
-                                    icon: 'success',
-                                    title: 'Product Removed From wishlist',
-                                    showConfirmButton: false,
-                                    timer: 1000
-                                })
-                                let count = $('#wishlist-count').html()
-                                count = parseInt(count) - 1
-                                $("#wishlist-count").html(parseInt(count))
-
+                                }
                             }
+
                         }
                     })
                 }
 
             </script>
 
-<!-- -----------zoom---------- -->
-<!-- <script src="/zoom/js/foundation.min.js"></script> -->
-<script src="/zoom/js/setup.js"></script>
-     <!-- -----------zoom---------- -->      
+            <!-- -----------zoom---------- -->
+            <!-- <script src="/zoom/js/foundation.min.js"></script> -->
+            <script src="/zoom/js/setup.js"></script>
+            <!-- -----------zoom---------- -->
             <!-- Js Plugins -->
             <!-- <script src="/client/js/jquery-3.3.1.min.js"></script> -->
             <script src="/client/js/bootstrap.min.js"></script>
@@ -296,8 +326,8 @@
             <!-- MDB -->
             <script type="text/javascript"
                 src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
-                
-                
-</body>
 
-</html>
+
+            </body>
+
+            </html>
