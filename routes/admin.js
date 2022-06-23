@@ -354,7 +354,7 @@ router.get("/delete-productOffer/:id", veryfyAdminLogin, (req, res) => {
   res.redirect("/admin/product-offer");
 });
 //coupen management
-router.get("/coupon", async (req, res) => {
+router.get("/coupon",veryfyAdminLogin, async (req, res) => {
   adminHelpers.getAllCoupons().then((coupons) => {
     let alert = req.flash("msg");
     res.render("admin/coupon", { alert, coupons });
@@ -373,7 +373,7 @@ router.post("/add-coupon", (req, res) => {
     });
 });
 //edit coupon
-router.get("/edit-coupon/:id", (req, res) => {
+router.get("/edit-coupon/:id",veryfyAdminLogin, (req, res) => {
   adminHelpers.getOneCoupon(req.params.id).then((coupon) => {
     res.render("admin/edit-coupon", { coupon });
   });
@@ -384,7 +384,7 @@ router.post("/edit-coupon/:id", (req, res) => {
   });
 });
 //delete coupens
-router.get("/delete-coupon/:id", (req, res) => {
+router.get("/delete-coupon/:id",veryfyAdminLogin, (req, res) => {
   adminHelpers.deleteCoupon(req.params.id).then(() => {
     res.redirect("/admin/coupon");
   });
@@ -408,7 +408,7 @@ router.post("/categoryOffer", (req, res) => {
   console.log(req.body);
 });
 //edit-cetegory offer
-router.get('/edit-cateOffer/:id',async(req,res)=>{
+router.get('/edit-cateOffer/:id',veryfyAdminLogin,async(req,res)=>{
   let categories=await productHelpers.getAllCategory()
 let cateOffer=await adminHelpers.getCatOfferDetails(req.params.id)
 res.render('admin/edit-cateOffer',{cateOffer,categories})
@@ -417,7 +417,7 @@ router.post('/edit-cateOffer/:id',(req,res)=>{
   console.log(req.body)
 })
 //delete cate offer
-router.get('/delete-cateOffer/:id',(req,res)=>{
+router.get('/delete-cateOffer/:id',veryfyAdminLogin,(req,res)=>{
   adminHelpers.deleteCatOffer(req.params.id).then(()=>{
     res.redirect('/admin/category-offer')
   })
@@ -540,14 +540,14 @@ console.log("jihihhhhhihihihih");
 });
 // ---------------------------------------------------_
 //banners
-router.get('/banner',async(req,res)=>{
+router.get('/banner',veryfyAdminLogin,async(req,res)=>{
   let banners = await adminHelpers.getBanners()
   
   console.log(banners)
   res.render('admin/banners',{banners})
 })
 //add banner
-router.get('/addBanner',async(req,res)=>{
+router.get('/addBanner',veryfyAdminLogin,async(req,res)=>{
   let categories = await productHelpers.getAllCategory()
 res.render('admin/add-banner',{categories})
 })
@@ -563,7 +563,7 @@ res.redirect('/admin/banner')
   })
 })
 //edit banner
-router.get('/editBanner/:id',async(req,res)=>{
+router.get('/editBanner/:id',veryfyAdminLogin,async(req,res)=>{
 let banner=await adminHelpers.getBanner(req.params.id)
 let categories = await productHelpers.getAllCategory()
 res.render('admin/edit-banner',{banner,categories})
@@ -587,14 +587,14 @@ router.get('/deleteBanner/:id',(req,res)=>{
   })
 })
 //posters
-router.get('/poster',async(req,res)=>{
+router.get('/poster',veryfyAdminLogin,async(req,res)=>{
   let posters = await adminHelpers.getPosters()
   
   
   res.render('admin/posters',{posters})
 })
 //add poster
-router.get('/addPoster',async(req,res)=>{
+router.get('/addPoster',veryfyAdminLogin,async(req,res)=>{
   
 res.render('admin/add-poster')
 })
@@ -610,7 +610,7 @@ res.redirect('/admin/poster')
   })
 })
 //edit poster
-router.get('/editPoster/:id',async(req,res)=>{
+router.get('/editPoster/:id',veryfyAdminLogin,async(req,res)=>{
 let banner=await adminHelpers.getPoster(req.params.id)
 res.render('admin/edit-poster',{banner})
 })
@@ -627,7 +627,7 @@ res.redirect('/admin/poster')
   })
 })
 //delete poster
-router.get('/deletePoster/:id',(req,res)=>{
+router.get('/deletePoster/:id',veryfyAdminLogin,(req,res)=>{
   adminHelpers.deletePoster(req.params.id).then(()=>{
     res.redirect('/admin/poster')
   })

@@ -61,7 +61,13 @@
 
                                     <div style="min-width: 280px;"
                                         class="card col-lg-3 col-11 col-sm-10 col-md-8 m-4 text-center">
+                                        
                                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                            <%if(x.proPercentage >0){%>
+                                            <h6>Offer<span class="badge badge-danger"><%=x.proPercentage%> %</span></h6>
+                                            <%}else if(x.catOfferPercentage >0){%>
+                                                <h6>Offer<span class="badge badge-danger"><%=x.catOfferPercentage%> %</span></h6>
+                                                <%}%>
                                             <img style="height: 250px;" src="/uploads/<%=x.image[0].image1%>"
                                                 class="img-fluid" />
                                             <a href="/view-products/<%=x._id%>">

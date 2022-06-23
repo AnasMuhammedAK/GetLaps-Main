@@ -19,7 +19,7 @@ const authToken = process.env.authToken;
 const otp = require("twilio")(accountSID, authToken);
 
 //----------------------------------
-setInterval(offerCheck, 60000);
+setInterval(offerCheck, 1000);
 function offerCheck() {
   let todayDate = new Date().toISOString().slice(0, 10);
   adminHelpers.startProductOffer(todayDate);
@@ -339,7 +339,7 @@ router.get("/addToWishlist/:id", (req, res) => {
   
 });
 //add to cart from wishlist
-router.get("/addToCart/:id", (req, res) => {
+router.get("/addToCart/:id", veryfyUserLogin,(req, res) => {
   console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
   userHelpers
     .addToCart(req.params.id, req.session.user._id)
@@ -367,7 +367,7 @@ router.get("/wishlist", veryfyUserLogin, async (req, res) => {
   });
 });
 //removeWishProducts
-router.get("/removeWishProduct/:id", (req, res) => {
+router.get("/removeWishProduct/:id",veryfyUserLogin, (req, res) => {
   userHelpers.removeProduct(req.params.id, req.session.user._id).then(() => {
     res.redirect("/wishlist");
   });
@@ -576,7 +576,7 @@ router.get("/view-order-products/:id", veryfyUserLogin, async (req, res) => {
   });
 });
 ///cancelOrder
-router.get("/cancelOrder/:id", async(req, res) => {
+router.get("/cancelOrder/:id",veryfyUserLogin, async(req, res) => {
   adminHelpers.cancelOrder(req.params.id, req.query.refund,"Cancelled").then(() => {
    
     res.redirect("/orders");
@@ -625,7 +625,7 @@ router.get("/profile", veryfyUserLogin, async (req, res) => {
   });
 });
 //adress view
-router.get("/address", async (req, res) => {
+router.get("/address",veryfyUserLogin, async (req, res) => {
   let wishCount = await userHelpers.getWishCount(req.session.user._id);
   let cartCount = await userHelpers.getCartCount(req.session.user._id);
   let proPic = "";
@@ -647,7 +647,7 @@ router.get("/address", async (req, res) => {
   });
 });
 //adress view
-router.get("/add-address", async (req, res) => {
+router.get("/add-address",veryfyUserLogin, async (req, res) => {
   let wishCount = await userHelpers.getWishCount(req.session.user._id);
   let cartCount = await userHelpers.getCartCount(req.session.user._id);
   let proPic = "";
@@ -668,7 +668,7 @@ router.post("/add-address/:id", (req, res) => {
   });
 });
 //edit address
-router.get("/edit-address/:id", async (req, res) => {
+router.get("/edit-address/:id",veryfyUserLogin, async (req, res) => {
   let addressId = req.params.id;
   let userId = req.session.user._id;
   let address = await userHelpers.getOneAddress(userId, addressId);
@@ -697,7 +697,7 @@ router.post("/edit-address/:id", (req, res) => {
   });
 });
 //delete address
-router.get('/delete-address/:id',(req,res)=>{
+router.get('/delete-address/:id',veryfyUserLogin,(req,res)=>{
   
   userHelpers.deleteAddress(req.session.user._id,req.params.id).then(()=>{
     console.log('liiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')  
@@ -747,7 +747,7 @@ router.post("/changeProPic", uploads.single("propic"), (req, res) => {
 });
 
 //invoice
-router.get('/invoice/:oId',  async (req, res) => {
+router.get('/invoice/:oId',veryfyUserLogin,  async (req, res) => {
   let orderId = req.params.oId
   let userData = req.session.user
   let cartCount = await userHelpers.getCartCount(req.session.user._id);
