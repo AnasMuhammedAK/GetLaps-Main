@@ -11,11 +11,11 @@ const moment = require("moment");
 require("dotenv").config();
 const Razorpay = require("razorpay");
 const { resolve } = require("path");
-const keyId = process.env.keyId;
-const secretKey = process.env.secretKey;
+var key_id = process.env.key_id;
+var key_secret = process.env.key_secret;
 var instance = new Razorpay({
-  key_id: keyId,
-  key_secret: secretKey,
+  key_id: key_id,
+  key_secret: key_secret,
 });
 //---------------------------------------
 module.exports = {
@@ -947,12 +947,16 @@ let grandTotal=couponTotal?parseInt(couponTotal)+parseInt(orderData.discount):to
   },
   //razorpay order generation
   generateRazorpay: (orderId, totalPrice) => {
+   
+    console.log(totalPrice,"=======totalPrice");
     return new Promise((resolve, reject) => {
       var options = {
-        amount: totalPrice,
+       
+        amount: totalPrice*100,
         currency: "INR",
         receipt: orderId.toString(),
       };
+      console.log(options.amount,"========amount");
       instance.orders.create(options, (err, order) => {
         if (err) {
           console.log(err);
@@ -967,7 +971,7 @@ let grandTotal=couponTotal?parseInt(couponTotal)+parseInt(orderData.discount):to
   verifyPayment: (paymentData) => {
     return new Promise((resolve, reject) => {
       const crypto = require("crypto");
-      let hmac = crypto.createHmac("sha256", secretKey);
+      let hmac = crypto.createHmac("sha256", key_secret);
       hmac.update(
         paymentData["payment[razorpay_order_id]"] +
           "|" +

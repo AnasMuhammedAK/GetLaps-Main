@@ -19,7 +19,7 @@ const authToken = process.env.authToken;
 const otp = require("twilio")(accountSID, authToken);
 
 //----------------------------------
-setInterval(offerCheck, 1000);
+setInterval(offerCheck, 100000);
 function offerCheck() {
   let todayDate = new Date().toISOString().slice(0, 10);
   adminHelpers.startProductOffer(todayDate);
@@ -478,9 +478,7 @@ router.post("/placeOrder", async (req, res) => {
       userHelpers
         .placeOrder(req.body, products, totalPrice,req.session.couponTotal)
         .then((response) => {
-          console.log(
-            "checkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
-          );
+          
           req.session.orderId = response.insertedId.toString();
           console.log("order id" + req.session.orderId);
           userHelpers.stockChanger(req.session.orderId).then((response) => {
