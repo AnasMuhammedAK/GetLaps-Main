@@ -39,10 +39,11 @@
                           </div>
                           <div class="card-body p-4">
                             <div class="d-flex justify-content-between align-items-center mb-4">
-                                <a class="btn" href="/invoice/<%=order._id%>"><p class="lead fw-normal mb-0" style="color: #000000;">Invoice</p></a>
-                              <p class="small text-muted mb-0">Order Id : <%=order._id%>
+                                <a class="btn" href="/invoice/<%=order._id%>"><p class="mb-0" style="color: #000000;">Invoice</p></a>
+                              
                               </p>
                             </div>
+                            <p class="small text-muted mb-0">Order Id : <%=order._id%>
                             <% products.forEach((x)=> { %>
 
                               <div class="card shadow-0 border mb-4">
